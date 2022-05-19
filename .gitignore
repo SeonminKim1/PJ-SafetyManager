@@ -1,5 +1,0 @@
-venv/*
-*.idea/*
-idea/misc.xml
-detector/__pycache__/*
-detector/utils/__pycache__/*
