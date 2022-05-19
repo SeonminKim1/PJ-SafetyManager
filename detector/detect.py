@@ -233,8 +233,8 @@ def parse_opt():
 
 def detect_run(weights_path, source_path):
     opt = parse_opt()
-    opt.weights=weights_path # 학습한 가중치
-    opt.source =source_path # upload img
+    opt.weights = weights_path # 학습한 가중치
+    opt.source = source_path # upload img
     # check_requirements(exclude=('tensorboard', 'thop'))
     save_dir = run(**vars(opt))
     print('===detect.py', type(save_dir), save_dir)
