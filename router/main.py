@@ -57,11 +57,11 @@ def file_upload():
 def video_upload():
     print('video_upload()실행')
     file = request.files['video']  # werkzeug.datastructures.FileStorage, name
-    print(file)
+    print(file) # 전체적인 파일의 개요 확인
     extension = secure_filename(file.filename).split('.')[-1]  # file.filename /
-    print(extension)
+    print(extension) #확장자만 추출
     f_name = file.filename.replace('.' + extension, '')  # test1, 확장자 제거
-    print(f_name)
+    print(f_name) #파일명만 추출
 
     # 파일 이름 , Local에 Upload 한 이미지 저장
     today = datetime.now()
