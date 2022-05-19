@@ -1,3 +1,49 @@
-결과 이미지 path 는 {{result_path}} 입니다.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<img src={{result_path}}>
+  <!--ajax 연결 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+</head>
+<script>
+  function posting() {
+    let file = $('#file')[0].files[0]
+    //let filename = file['name']
+    let form_data = new FormData() // FormData 처럼 보내는 방식
+    //form_data.append("f_name", filename)
+    form_data.append("file", file)
+    console.log(file, typeof(file))
+    //console.log(filename, typeof(filename)) // test3.jpg
+
+    $.ajax({ // 비동기 방식
+        type: "POST",
+        url: "/main/api/img/upload",
+        data: form_data,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            alert(response["result"])
+            predict_path = response["predict_path"]
+            $('#upload_img_box').attr("src", window.URL.createObjectURL(file));
+            $('#predict_img_box').attr("src", predict_path)
+            // window.location.reload()
+        }
+    });
+  }
+
+</script>
+<body>
+  <h1> 파일로 이미지 업로드 하기 </h1>
+  <div id="file_div">
+    <input id="file" type="file">
+    <button class='btn' onclick="posting()">업로드</button>
+  </div>
+  <div>
+      <img id = "upload_img_box" src="">
+      <img id = "predict_img_box" src="" >
+</body>
+</html>
