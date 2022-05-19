@@ -3,3 +3,4 @@ venv/*
 idea/misc.xml
 detector/__pycache__/*
 detector/utils/__pycache__/*
+__pycache__/
