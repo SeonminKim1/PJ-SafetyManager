@@ -225,7 +225,7 @@ def parse_opt():
     parser.add_argument('--hide-conf', default=False, action='store_true', help='hide confidences')
     parser.add_argument('--half', action='store_true', help='use FP16 half-precision inference')
     parser.add_argument('--dnn', action='store_true', help='use OpenCV DNN for ONNX inference')
-    opt = parser.parse_args()
+    opt = parser.parse_args(args=[])
     opt.imgsz *= 2 if len(opt.imgsz) == 1 else 1  # expand
     print_args(vars(opt))
     return opt
@@ -233,8 +233,8 @@ def parse_opt():
 
 def detect_run(weights_path, source_path):
     opt = parse_opt()
-    opt.weights=weights_path # 학습한 가중치
-    opt.source =source_path # upload img
+    opt.weights = weights_path # 학습한 가중치
+    opt.source = source_path # upload img
     # check_requirements(exclude=('tensorboard', 'thop'))
     save_dir = run(**vars(opt))
     print('===detect.py', type(save_dir), save_dir)
