@@ -39,7 +39,7 @@ def file_upload():
     print('upload_path: ', upload_path)
     print('predict_path: ', predict_path)
     print('results', results)
-
+    
     # DB에 Image Path 저장
     doc = {
         'id': 'id',
