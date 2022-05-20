@@ -33,25 +33,27 @@ def file_upload():
     upload_path = 'static/upload_data/' + filename + '.' + extension
     file.save(upload_path) # 'static/upload_data/test1.jpg
 
-    predict_path = detect_run(WEIGHTS_PATH, upload_path) + '/' + filename + '.' + extension
+    predict_path, results = detect_run(WEIGHTS_PATH, upload_path)
+    predict_path = predict_path + '/' + filename + '.' + extension
     print('WEIGHTS_PATH: ', WEIGHTS_PATH)
     print('upload_path: ', upload_path)
     print('predict_path: ', predict_path)
+    print('results', results)
 
     # DB에 Image Path 저장
     doc = {
-        'id':'id',
-        'company' : 'samsung',
-        'isPass' : True,
-        'helmet' : 0,
-        'head' : 0,
-        'score' : 0.0,
-        'date' : today,
-        'upload_path' : upload_path,
+        'id': 'id',
+        'company': 'samsung',
+        'helmet': int(results['helmet']),
+        'head': int(results['head']),
+        'score': float(results['score']),
+        'isPass': bool(results['isPass']),
+        'date': today,
+        'upload_path': upload_path,
         'predict_path': predict_path
     }
     db.result.insert_one(doc)
-    return jsonify({'result':'success', 'predict_path': predict_path})
+    return jsonify({'result':'success', 'predict_path': predict_path, 'results':results})
 
 @bp.route("/api/video/upload", methods=['POST'])
 def video_upload():
@@ -70,22 +72,24 @@ def video_upload():
     upload_path = 'static/upload_data/' + filename + '.' + extension
     file.save(upload_path)  # 'static/upload_data/test1.jpg
 
-    # predict_path = detect_run(WEIGHTS_PATH, upload_path) + '/' + filename + '.' + extension
+    predict_path, results = detect_run(WEIGHTS_PATH, upload_path)
+    predict_path = predict_path + '/' + filename + '.' + extension
     print('WEIGHTS_PATH: ', WEIGHTS_PATH)
     print('upload_path: ', upload_path)
-    # print('predict_path: ', predict_path)
+    print('predict_path: ', predict_path)
+    print('results', results)
 
     # DB에 Image Path 저장
     doc = {
         'id': 'id',
         'company': 'samsung',
-        'isPass': True,
-        'helmet': 0,
-        'head': 0,
-        'score': 0.0,
+        'helmet': int(results['helmet']),
+        'head': int(results['head']),
+        'score': float(results['score']),
+        'isPass': bool(results['isPass']),
         'date': today,
-        'upload_path': upload_path
-        # 'predict_path': predict_path
+        'upload_path': upload_path,
+        'predict_path': predict_path
     }
     db.result.insert_one(doc)
-    return jsonify({'result': 'success', 'video': upload_path})
+    return jsonify({'result': 'success', 'video': upload_path, 'results':results})

@@ -57,6 +57,12 @@
                 predict_path = response["predict_path"]
                 $('#upload_img_box').attr("src", window.URL.createObjectURL(file));
                 $('#predict_img_box').attr("src", predict_path)
+
+                results = response["results"]
+                $('#helmet_value').text(results['helmet'])
+                $('#head_value').text(results['head'])
+                $('#score_value').text(results['score'])
+                $('#isPass_value').text(results['isPass'])
                 // window.location.reload()
             }
         });
@@ -79,6 +85,12 @@
                                 <source src="${video_src}" type="video/mp4">
                                 지원되지 않는 브라우저 입니다.</video>`
                 $('#video_preview').html(temp_html)
+                
+                results = response["results"]
+                $('#helmet_value').text(results['helmet'])
+                $('#head_value').text(results['head'])
+                $('#score_value').text(results['score'])
+                $('#isPass_value').text(results['isPass'])
             }
         })
     }
@@ -106,6 +118,13 @@
     <div style="display: flex; justify-content: center; align-items: center;">
         <img style="width: 400px;" id="upload_img_box" src="" alt="">
         <img style="width: 400px;" id="predict_img_box" src="" alt="">
+    </div>
+    <hr>
+    <div>
+        <label>Helmet: </label><span id="helmet_value">0</span>
+        <label>No Helmet: </label><span id="head_value">0</span>
+        <label>Score: </label><span id="score_value">0.0</span>
+        <label>Safety: </label><span id="isPass_value">none</span>
     </div>
 </section>
 
