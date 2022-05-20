@@ -260,21 +260,7 @@ def calculate_score(results):
         if label not in result_dict:
             result_dict[label] = 0
 
-    score = 100 * result_dict['helmet'] / (result_dict['helmet'] + result_dict['score'])
+    score = result_dict['helmet'] / (result_dict['helmet'] + result_dict['head']) * 100
     result_dict['isPass'] = True if score > 95 else False
-    result_dict['score'] = float(score)
-    return result_dict
-
-def calculate_score(results):
-    from collections import Counter
-    # results는 이미지에서 판별된 label 들이 담겨 있는 list
-    result_dict = dict(Counter(results)) # list 각 갯수 세서 dict로
-
-    for label in ['helmet','head','person','score','isPass']:
-        if label not in result_dict:
-            result_dict[label] = 0
-
-    score = 100 * result_dict['helmet'] / (result_dict['helmet'] + result_dict['score'])
-    result_dict['isPass'] = True if score > 95 else False
-    result_dict['score'] = float(score)
+    result_dict['score'] = round(float(score),2)
     return result_dict

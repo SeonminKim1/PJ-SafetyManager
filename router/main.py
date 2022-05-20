@@ -33,7 +33,7 @@ def file_upload():
     upload_path = 'static/upload_data/' + filename + '.' + extension
     file.save(upload_path) # 'static/upload_data/test1.jpg
 
-    predict_path, results = detect_run(WEIGHTS_PATH, upload_path)
+    predict_path, results = detect_run(WEIGHTS_PATH, upload_path, False)
     predict_path = predict_path + '/' + filename + '.' + extension
     print('WEIGHTS_PATH: ', WEIGHTS_PATH)
     print('upload_path: ', upload_path)
@@ -72,7 +72,7 @@ def video_upload():
     upload_path = 'static/upload_data/' + filename + '.' + extension
     file.save(upload_path)  # 'static/upload_data/test1.jpg
 
-    predict_path, results = detect_run(WEIGHTS_PATH, upload_path)
+    predict_path, results = detect_run(WEIGHTS_PATH, upload_path, True)
     predict_path = predict_path + '/' + filename + '.' + extension
     print('WEIGHTS_PATH: ', WEIGHTS_PATH)
     print('upload_path: ', upload_path)
