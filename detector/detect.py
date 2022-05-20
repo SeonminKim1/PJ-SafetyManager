@@ -237,16 +237,33 @@ def parse_opt():
     return opt
 
 
-def detect_run(weights_path, source_path):
+def detect_run(weights_path, source_path, is_video):
     opt = parse_opt()
     opt.weights = weights_path # 학습한 가중치
     opt.source = source_path # upload img
     # check_requirements(exclude=('tensorboard', 'thop'))
     save_dir, results = run(**vars(opt))
-    results = calculate_score(results)
+    if is_video:
+        results = calculate_score(results)
+    else:
+        results = calculate_score(results)
     # print('===results', results)
     print('===detect.py', type(save_dir), save_dir)
     return str(save_dir), results
+
+def calculate_score(results):
+    from collections import Counter
+    # results는 이미지에서 판별된 label 들이 담겨 있는 list
+    result_dict = dict(Counter(results)) # list 각 갯수 세서 dict로
+
+    for label in ['helmet','head','person','score','isPass']:
+        if label not in result_dict:
+            result_dict[label] = 0
+
+    score = 100 * result_dict['helmet'] / (result_dict['helmet'] + result_dict['score'])
+    result_dict['isPass'] = True if score > 95 else False
+    result_dict['score'] = float(score)
+    return result_dict
 
 def calculate_score(results):
     from collections import Counter

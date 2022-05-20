@@ -58,7 +58,7 @@ def file_upload():
 @bp.route("/api/video/upload", methods=['POST'])
 def video_upload():
     print('video_upload()실행')
-    file = request.files['video']  # werkzeug.datastructures.FileStorage, name
+    file = request.files['file']  # werkzeug.datastructures.FileStorage, name
     print(file) # 전체적인 파일의 개요 확인
     extension = secure_filename(file.filename).split('.')[-1]  # file.filename /
     print(extension) #확장자만 추출
@@ -92,4 +92,4 @@ def video_upload():
         'predict_path': predict_path
     }
     db.result.insert_one(doc)
-    return jsonify({'result': 'success', 'video': upload_path, 'results':results})
+    return jsonify({'result': 'success', 'video': upload_path, 'predict_path': predict_path, 'results':results})
