@@ -95,6 +95,9 @@ def run(
     # Run inference
     model.warmup(imgsz=(1 if pt else bs, 3, *imgsz))  # warmup
     dt, seen = [0.0, 0.0, 0.0], 0
+
+    # Customize 부분
+    results = []
     for path, im, im0s, vid_cap, s in dataset:
         t1 = time_sync()
         im = torch.from_numpy(im).to(device)
@@ -107,14 +110,14 @@ def run(
 
         # Inference
         visualize = increment_path(save_dir / Path(path).stem, mkdir=True) if visualize else False
-        pred = model(im, augment=augment, visualize=visualize)
+        pred = model(im, augment=augment, visualize=visualize) # 추론 결과
         t3 = time_sync()
         dt[1] += t3 - t2
 
         # NMS
         pred = non_max_suppression(pred, conf_thres, iou_thres, classes, agnostic_nms, max_det=max_det)
         dt[2] += time_sync() - t3
-
+        
         # Second-stage classifier (optional)
         # pred = utils.general.apply_classifier(pred, classifier_model, im, im0s)
 
@@ -153,8 +156,11 @@ def run(
 
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
+                        # Customize
+                        results.append(names[c])
                         label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
                         annotator.box_label(xyxy, label, color=colors(c, True))
+                        
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 
@@ -180,7 +186,7 @@ def run(
                         else:  # stream
                             fps, w, h = 30, im0.shape[1], im0.shape[0]
                         save_path = str(Path(save_path).with_suffix('.mp4'))  # force *.mp4 suffix on results videos
-                        vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'X264'), fps, (w, h))
+                        vid_writer[i] = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'X264'), fps, (w, h)) #  mp4v
                     vid_writer[i].write(im0)
 
         # Print time (inference-only)
@@ -194,7 +200,7 @@ def run(
         LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}{s}")
     if update:
         strip_optimizer(weights)  # update model (to fix SourceChangeWarning)
-    return save_dir
+    return save_dir, results
 
 
 def parse_opt():
@@ -231,11 +237,30 @@ def parse_opt():
     return opt
 
 
-def detect_run(weights_path, source_path):
+def detect_run(weights_path, source_path, is_video):
     opt = parse_opt()
     opt.weights = weights_path # 학습한 가중치
     opt.source = source_path # upload img
     # check_requirements(exclude=('tensorboard', 'thop'))
-    save_dir = run(**vars(opt))
+    save_dir, results = run(**vars(opt))
+    if is_video:
+        results = calculate_score(results)
+    else:
+        results = calculate_score(results)
+    # print('===results', results)
     print('===detect.py', type(save_dir), save_dir)
-    return str(save_dir)
+    return str(save_dir), results
+
+def calculate_score(results):
+    from collections import Counter
+    # results는 이미지에서 판별된 label 들이 담겨 있는 list
+    result_dict = dict(Counter(results)) # list 각 갯수 세서 dict로
+
+    for label in ['helmet','head','person','score','isPass']:
+        if label not in result_dict:
+            result_dict[label] = 0
+
+    score = result_dict['helmet'] / (result_dict['helmet'] + result_dict['head']) * 100
+    result_dict['isPass'] = True if score > 95 else False
+    result_dict['score'] = round(float(score),2)
+    return result_dict

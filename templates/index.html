@@ -58,6 +58,11 @@
                     $('#upload_box').attr("src", window.URL.createObjectURL(file));
                     $('#predict_box').attr("src", predict_path)
                     // window.location.reload()
+                    results = response["results"]
+                    $('#helmet_value').text(results['helmet'])
+                    $('#head_value').text(results['head'])
+                    $('#score_value').text(results['score'])
+                    $('#isPass_value').text(results['isPass'])
                 }
             });
         } else {
@@ -79,6 +84,12 @@
                                             지원되지 않는 브라우저 입니다.</video>`
                 $('.upload_box').html(upload_temp_html)
                 $('.predict_box').html(predict_temp_html)
+
+                results = response["results"]
+                $('#helmet_value').text(results['helmet'])
+                $('#head_value').text(results['head'])
+                $('#score_value').text(results['score'])
+                $('#isPass_value').text(results['isPass'])
             }
         })
         }
@@ -107,11 +118,16 @@
     <div class="upload_box" style="display: flex; justify-content: center; align-items: center;">
         <img style="width: 400px;" id="upload_box" src="" alt="">
         <img style="width: 400px;" id="predict_box" src="" alt="">
+        
     </div>
     <div  class="predict_box" style="display: flex; justify-content: center; align-items: center;">
-    <video id="predict_preview" autoplay controls muted preload="auto" width="300px" height="300px">
-                                            <source src="static/predict_data/inference20/pexels-los-muertos-crew-8853529-2022-05-20-11-21-49.mp4" type="video/mp4">
-                                            지원되지 않는 브라우저 입니다.</video>
+    </div>
+    <hr>
+    <div>
+        <label>Helmet: </label><span id="helmet_value">0</span>
+        <label>No Helmet: </label><span id="head_value">0</span>
+        <label>Score: </label><span id="score_value">0.0</span>
+        <label>Safety: </label><span id="isPass_value">none</span>
     </div>
 </section>
 
