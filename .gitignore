@@ -1,0 +1,7 @@
+venv/*
+.idea/*
+__pycache__/*
+detector/__pycache__/*
+detector/models/__pycache__/*
+detector/utils/__pycache__/*
+router/__pycache__/*
