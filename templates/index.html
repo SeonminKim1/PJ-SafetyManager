@@ -76,12 +76,11 @@
                 alert(response['result'])
                 let video_src = response['video']
                 let temp_html = `<video id="video_preview" autoplay controls muted preload="auto" width="300px" height="300px">
-        <source src="${video_src}" type="video/mp4">
-        지원되지 않는 브라우저 입니다.
-    </video>`
+                                <source src="${video_src}" type="video/mp4">
+                                지원되지 않는 브라우저 입니다.</video>`
                 $('#video_preview').html(temp_html)
             }
-        });
+        })
     }
 
 </script>
