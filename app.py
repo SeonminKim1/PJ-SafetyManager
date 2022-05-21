@@ -1,12 +1,11 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import certifi
-from werkzeug.utils import secure_filename
-from datetime import datetime
-from router import main
+from router import main, detect
 
 app = Flask(__name__)
 
 app.register_blueprint(main.bp) #/main
+app.register_blueprint(detect.bp) #/detect
 
 SECRET_KEY = '$lucky7'
 WEIGHTS_PATH = 'detector/weights/best.pt'

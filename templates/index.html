@@ -41,14 +41,38 @@
 
     }
 
-    function posting() {
+    // Upload UX #1 - Preview (not upload)
+    function preview() {
+        change_area_css()
         let file = $('#file')[0].files[0]
-        //let filename = file['name']
+        
+        if (file.type.match(/image.*/)) {
+            $('#upload_box').css({
+                'height': '400px',
+                'width': '400px',
+                'margin': '5px 10px 5px 10px'
+            });
+            $('#upload_box').attr("src", window.URL.createObjectURL(file));
+        }else{
+            let upload_temp_html = `<video id="upload_preview" controls muted preload="auto">
+                <source src=` + window.URL.createObjectURL(file) + ` type="video/mp4">
+                지원되지 않는 브라우저 입니다.</video>`
+            $('#upload_div').html(upload_temp_html)
+            $('#upload_preview').css({
+            'height': '400px',
+            'width': '400px',
+            'margin': '5px 10px 5px 10px'
+            });
+        }
+    }
+
+    var upload_path = ''
+    // Upload UX #2 - Upload to Server
+    function posting() {
+        let file = $('#file')[0].files[0] // 'if you view filename => file['name'] => test3.jpg
         let form_data = new FormData() // FormData 처럼 보내는 방식
-        //form_data.append("f_name", filename)
-        form_data.append("file", file)
-        console.log(file, typeof (file))
-        //console.log(filename, typeof(filename)) // test3.jpg
+        form_data.append("file", file) // console.log(file, typeof (file))
+        // check images or video
         if (file.type.match(/image.*/)) {
             $.ajax({ // 비동기 방식
                 type: "POST",
@@ -57,25 +81,44 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    alert(response["result"])
-                    change_area_css()
+                    alert(response["msg"])
+                    upload_path = response['upload_path']
+                }
+            });
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/main/api/video/upload",
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert(response["msg"])
+                    upload_path = response['upload_path']
+                }
+            });
+        }
+    }
+
+    // Upload UX #3 - Detection in Server
+    function detecting() {
+        let file = $('#file')[0].files[0] // 'if you view filename => file['name'] => test3.jpg
+        // check images or video
+        if (file.type.match(/image.*/)) {
+            $.ajax({ // 비동기 방식
+                type: "POST",
+                url: "/detect/api/img/inference",
+                data: {'upload_path':upload_path},
+                success: function (response) {
+                    alert(response["msg"])
                     predict_path = response["predict_path"]
-
-                    $('#upload_box').css({
-                        'height': '400px',
-                        'width': '400px',
-                        'margin': '5px 10px 5px 10px'
-                    });
-
                     $('#predict_box').css({
                         'height': '400px',
                         'width': '400px',
                         'margin': '5px 10px 5px 10px'
                     });
-
-                    $('#upload_box').attr("src", window.URL.createObjectURL(file));
                     $('#predict_box').attr("src", predict_path)
-                    // window.location.reload()
+
                     results = response["results"]
                     $('#helmet_value').text(results['helmet'])
                     $('#head_value').text(results['head'])
@@ -87,30 +130,15 @@
         } else {
             $.ajax({
                 type: "POST",
-                url: "/main/api/video/upload",
-                data: form_data,
-                contentType: false,
-                processData: false,
+                url: "/detect/api/video/inference",
+                data: {'upload_path':upload_path},
                 success: function (response) {
-                    alert(response['result'])
-                    change_area_css()
-                    let video_src = response['video']
+                    alert(response["msg"])
                     let predict_src = response['predict_path']
-                    let upload_temp_html = `<video id="upload_preview" autoplay controls muted preload="auto">
-                                            <source src="${video_src}" type="video/mp4">
-                                            지원되지 않는 브라우저 입니다.</video>`
                     let predict_temp_html = `<video id="predict_preview" autoplay controls muted preload="auto">
                                             <source src="${predict_src}" type="video/mp4">
                                             지원되지 않는 브라우저 입니다.</video>`
-                    $('#upload_div').html(upload_temp_html)
                     $('#predict_div').html(predict_temp_html)
-
-                    $('#upload_preview').css({
-                        'height': '400px',
-                        'width': '400px',
-                        'margin': '5px 10px 5px 10px'
-                    });
-
                     $('#predict_preview').css({
                         'height': '400px',
                         'width': '400px',
@@ -126,7 +154,6 @@
             })
         }
     }
-
 </script>
 <body>
 {% include 'nav.html' %}
@@ -152,7 +179,7 @@
         <div class="btn_box">
             <div>
                 <label for="file" class="btn btn_blue">파일 선택</label>
-                <input id="file" type="file" style="display: none">
+                <input id="file" type="file" style="display: none" onChange="preview()">
             </div>
             <div>
                 <button class="btn btn_red" type="button" onclick="posting()">업로드 하기</button>
