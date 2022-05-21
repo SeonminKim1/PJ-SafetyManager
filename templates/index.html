@@ -26,16 +26,19 @@
 
 </head>
 <script>
-    function change_area_css(){
+    function change_area_css() {
         $('.img_box').hide()
         $('.main_box').show()
-        $('.main_box').css('display', 'flex');
-        $('.main_box').css('height', '500px');
-        $('.main_box').css('width', '100%');
-        $('.main_box').css('padding-bottom', '40px');
-        $('.main_box').css('flex-direction', 'row');
-        $('.main_box').css('justify-content', 'center');
-        $('.main_box').css('align-items', 'center');
+        $('.main_box').css({
+            "display": "flex",
+            "height": "500px",
+            "width": "100%",
+            "padding-bottom": "40px",
+            "flex-direction": "row",
+            "justify-content": "center",
+            "align-items": "center"
+        });
+
     }
 
     function posting() {
@@ -58,14 +61,18 @@
                     change_area_css()
                     predict_path = response["predict_path"]
 
-                    $('#upload_box').css('height', '400px');
-                    $('#upload_box').css('width', '400px');
-                    $('#upload_box').css('margin', '5px 10px 5px 10px');
+                    $('#upload_box').css({
+                        'height': '400px',
+                        'width': '400px',
+                        'margin': '5px 10px 5px 10px'
+                    });
 
-                    $('#predict_box').css('height', '400px');
-                    $('#predict_box').css('width', '400px');        
-                    $('#predict_box').css('margin', '5px 10px 10px 10px');
-                    
+                    $('#predict_box').css({
+                        'height': '400px',
+                        'width': '400px',
+                        'margin': '5px 10px 5px 10px'
+                    });
+
                     $('#upload_box').attr("src", window.URL.createObjectURL(file));
                     $('#predict_box').attr("src", predict_path)
                     // window.location.reload()
@@ -79,41 +86,44 @@
             });
         } else {
             $.ajax({
-            type: "POST",
-            url: "/main/api/video/upload",
-            data: form_data,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-                alert(response['result'])
-                change_area_css()
-                let video_src = response['video']
-                let predict_src = response['predict_path']
-                let upload_temp_html = `<video id="upload_preview" autoplay controls muted preload="auto">
+                type: "POST",
+                url: "/main/api/video/upload",
+                data: form_data,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert(response['result'])
+                    change_area_css()
+                    let video_src = response['video']
+                    let predict_src = response['predict_path']
+                    let upload_temp_html = `<video id="upload_preview" autoplay controls muted preload="auto">
                                             <source src="${video_src}" type="video/mp4">
                                             지원되지 않는 브라우저 입니다.</video>`
-                let predict_temp_html = `<video id="predict_preview" autoplay controls muted preload="auto">
+                    let predict_temp_html = `<video id="predict_preview" autoplay controls muted preload="auto">
                                             <source src="${predict_src}" type="video/mp4">
                                             지원되지 않는 브라우저 입니다.</video>`
-                $('#upload_div').html(upload_temp_html)
-                $('#predict_div').html(predict_temp_html)
+                    $('#upload_div').html(upload_temp_html)
+                    $('#predict_div').html(predict_temp_html)
 
-                $('#upload_preview').css('height', '400px');
-                $('#upload_preview').css('width', '400px');
-                $('#upload_preview').css('margin', '5px 10px 5px 10px');
-        
-                $('#predict_preview').css('height', '400px');
-                $('#predict_preview').css('width', '400px');        
-                $('#predict_preview').css('margin', '5px 10px 10px 10px');
+                    $('#upload_preview').css({
+                        'height': '400px',
+                        'width': '400px',
+                        'margin': '5px 10px 5px 10px'
+                    });
 
+                    $('#predict_preview').css({
+                        'height': '400px',
+                        'width': '400px',
+                        'margin': '5px 10px 5px 10px'
+                    });
 
-                results = response["results"]
-                $('#helmet_value').text(results['helmet'])
-                $('#head_value').text(results['head'])
-                $('#score_value').text(results['score'])
-                $('#isPass_value').text(results['isPass'])
-            }
-        })
+                    results = response["results"]
+                    $('#helmet_value').text(results['helmet'])
+                    $('#head_value').text(results['head'])
+                    $('#score_value').text(results['score'])
+                    $('#isPass_value').text(results['isPass'])
+                }
+            })
         }
     }
 
@@ -129,7 +139,7 @@
 
         <div class="img_box"></div>
         <div class="main_box">
-            <div id="upload_div"><img class = "test" id="upload_box" src="" alt=""></div>
+            <div id="upload_div"><img class="test" id="upload_box" src="" alt=""></div>
             <div id="predict_div"><img class="test" id="predict_box" src="" alt=""></div>
         </div>
         <div class="score_box">
