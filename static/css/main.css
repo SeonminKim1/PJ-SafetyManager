@@ -46,7 +46,7 @@ section {
 }
 
 /* main box */
-.main_box{
+.main_box, .main_vid_box{
     width:0px;
     height:0px;
     display: hidden;

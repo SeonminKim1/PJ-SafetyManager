@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
 import certifi
+
+# Import detector/main.py, detect.py
 from router import main, detect
 
 app = Flask(__name__)
