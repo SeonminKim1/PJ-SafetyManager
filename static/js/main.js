@@ -5,11 +5,13 @@ window.onload = function(){
     $('.main_box').hide()       // Upload, Predict Box - img
     $('.main_vid_box').hide()   // Upload, Predict Box - video
     $('.loading_box').hide()    // Loading Bar Box in Predict
-    $('.score_box').show()      // Score Box
+    $('.score_box').hide()      // Score Box
     $('.btn_box').show()        // Button Box (파일 선택, 업로드, 안전확인)
 }
 
-function change_area_css(is_img) {
+function preview_css(is_img) {
+    $('.score_box').show()
+    $('.score_box').css({'padding-bottom':'8px', 'color':'white'})
     $('.img_box').hide()
     if (is_img){
         target = '.main_box'; // target은 img, vid 가 나타나는 box의 tag를 의미함.
@@ -21,7 +23,7 @@ function change_area_css(is_img) {
     $(target).show()
     $(target).css({
         "display": "flex",
-        "height": "500px",
+        "height": "450px",
         "width": "100%",
         "padding-bottom": "40px",
         "flex-direction": "row",
@@ -30,18 +32,34 @@ function change_area_css(is_img) {
     });
 }
 
+function detect_css(results){
+    $('#helmet_value').text(results['helmet'])
+    $('#head_value').text(results['head'])
+    $('#score_value').text(results['score'])
+    var isPass = ''
+    if (results['isPass'] == true){
+        isPass = 'Safety'
+        $('#isPass_value').text(isPass); $('#result_label').text(isPass)
+        $('#isPass_value').css({'color':'green'}); $('#result_label').css({'color':'green'})
+    }else{
+        isPass = 'Warning'
+        $('#isPass_value').text(isPass); $('#result_label').text(isPass)
+        $('#isPass_value').css({'color':'red'}); $('#result_label').css({'color':'red'})
+    }
+}
 // Upload UX #1 - Preview (not upload)
 function preview() {
     let file = $('#file')[0].files[0]
     let is_img = file.type.match(/image.*/)
-    change_area_css(is_img) // div-box : hide and show
+    preview_css(is_img) // div-box : hide and show
     if (is_img) {
         $('#upload_img').show(); $('#predict_img').hide(); 
         $('#upload_vid').hide(); $('#predict_vid').hide(); 
         $('#upload_img').css({
-            'height': '400px',
-            'width': '400px',
-            'margin': '0px 10px 0px 10px'
+            'height': '450px',
+            'width': '450px',
+            'margin': '10px 10px 0px 10px',
+            'padding-top': '40px'
         });
         $('#upload_img').attr("src", window.URL.createObjectURL(file));
 
@@ -49,14 +67,22 @@ function preview() {
         $('#upload_vid').show(); $('#predict_vid').hide();
         $('#upload_img').hide(); $('#predict_img').hide(); 
         $('#upload_vid').css({
-            'height': '400px',
-            'width': '400px',
-            'margin': '0px 10px 0px 10px'
+            'height': '450px',
+            'width': '450px',
+            'margin': '10px 10px 0px 10px',
+            'padding-top': '40px'
         });
         var video = document.getElementById('upload_vid');
         $("#upload_vid_src").attr("src", window.URL.createObjectURL(file))
         video.load();
     }
+    $('#result_label').text('Safety Manager')   
+    $('#result_label').css({'color':'green'}) 
+    $('#helmet_value').text('0')
+    $('#head_value').text('0')
+    $('#score_value').text('0.0')
+    $('#isPass_value').text('None')
+    $('#isPass_value').css({'color':'white'})
 }
 
 var upload_path = ''
@@ -111,18 +137,14 @@ function detecting() {
                 $('#predict_img').show()
                 predict_path = response["predict_path"]
                 $('#predict_img').css({
-                    'height': '400px',
-                    'width': '400px',
-                    'margin': '0px 10px 0px 10px'
+                    'height': '450px',
+                    'width': '450px',
+                    'margin': '0px 10px 0px 10px',
+                    'padding-top': '40px'
                 });
                 $('#predict_img').attr("src", predict_path)
-
                 results = response["results"]
-                $('#helmet_value').text(results['helmet'])
-                $('#head_value').text(results['head'])
-                $('#score_value').text(results['score'])
-                $('#isPass_value').text(results['isPass'])
-                $('#result_label').text(results['isPass'])
+                detect_css(results)
             }
         });
     } else {
@@ -141,16 +163,14 @@ function detecting() {
                 video.load();
 
                 $('#predict_vid').css({
-                    'height': '400px',
-                    'width': '400px',
-                    'margin': '0px 10px 0px 10px'
+                    'height': '450px',
+                    'width': '450px',
+                    'margin': '10px 10px 0px 10px',
+                    'padding-top': '40px'
                 });
-
+                
                 results = response["results"]
-                $('#helmet_value').text(results['helmet'])
-                $('#head_value').text(results['head'])
-                $('#score_value').text(results['score'])
-                $('#isPass_value').text(results['isPass'])
+                detect_css(results)
             }
         })
     }
