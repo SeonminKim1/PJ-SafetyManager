@@ -48,13 +48,18 @@
                     <th>점수</th>
                 </tr>
                 {% for rank in ranking %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ rank.company }}</td>
-                    <td>{{ rank.score }}</td>
-                </tr>
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ rank.company }}</td>
+                        <td>{{ rank.score }}</td>
+                    </tr>
                 {% endfor %}
             </table>
+        </div>
+        <div class="page_btn">
+            <a href="/ranking/?page=0">1</a>
+            <a href="/ranking/?page=1">2</a>
+            <a href="/ranking/?page=2">3</a>
         </div>
 
 

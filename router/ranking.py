@@ -51,5 +51,13 @@ def ranking():
         company_high_score.append(avg_score)
         sort_data = sorted(company_high_score, key=itemgetter('score'), reverse=True)
     print(sort_data)
+    page = request.args.get("page", type=int, default=0)
+    per_page = 10
+    max_length = len(sort_data)
+    print(max_length)
+    start_page = page * 10
+    top10 = sort_data[start_page: start_page + per_page]
 
-    return render_template('/ranking.html', ranking=sort_data)
+    return render_template('/ranking.html',
+                           ranking=top10,
+                           page=page)

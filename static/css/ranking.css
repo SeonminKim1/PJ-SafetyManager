@@ -6,3 +6,12 @@
     color:white;
     font-size: 24px;
 }
+
+/* score */
+.page_btn{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    color:white;
+    font-size: 24px;
+}
