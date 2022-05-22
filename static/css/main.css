@@ -10,63 +10,100 @@ body, html {
 }
 
 section {
-    width: 1000px;
-    height: 850px;
+    width: 100%;
+    height: 1000px;
+    padding:50px;
     /*padding: 10px;*/
-    margin: auto;
 }
 
-.container .con_img {
+.container {
     width: 100%;
-    padding-top: 100px;
+    height: 100%;
+    margin: 0 auto;
+    background-image: url('./img/monitor.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+}
+.result_box{
+    padding-top:50px;
+    color:green;
+    font-size:40px;
+    text-align:center;
+}
+
+.img_box{
+    width: 100%;
+    height: 500px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    background-image: url('./img/Safety-manager.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:450px;
+    padding-bottom:40px;
 }
 
-.container .con_btn {
+/* main box */
+.main_box{
+    width:0px;
+    height:0px;
+    display: hidden;
+}
+
+/* score */
+.score_box{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    color:white;
+    font-size: 24px;
+}
+.score_label{
+    margin: 5px 1px 5px 10px;
+}
+.score_value{
+    margin: 5px 10px 5px 1px;
+}
+
+/* btn */
+.btn_box {
     width: 100%;
-    margin-top: 15px;
-    display: grid;
+    margin-top: 40px;
+    display: flex;
     grid-template-columns: 1fr 1fr;
-    justify-items: center;
+    justify-content: center;
     align-content: center;
 }
 
-.container img {
-    width: 500px;
-    margin: 10px;
-}
-
-.w-btn-blue {
+.btn{
     width: 120px;
     height: 40px;
-    padding: 10px 20px 10px 20px;
+    margin:0px 5px 0px 5px; 
     border: none;
     border-radius: 15px;
     font-weight: 600;
     cursor: pointer;
-    display: inline-block;
     text-align: center;
-    margin-left: 200px;
-
-    background-color: #6aafe6;
     color: #e1eef6;
 }
-
-.w-btn-red {
-    width: 100px;
-    height: 40px;
-    border: none;
-    border-radius: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-right: 200px;
-
-    background-color: #ff5f2e;
-    color: #e1eef6;
+.btn_blue {
+    display: flex;
+    padding-top:7px;
+    justify-content: center;
+    align-content: center;
+    background-color: rgb(83, 112, 209);    
 }
 
-.w-btn-red:hover {
+.btn_red {
+    background-color: #ff5f2e;    
+}
+
+.btn_green {
+    background-color: rgb(134, 204, 29);    
+}
+
+.btn_green:hover {
     width: 120px;
 }
