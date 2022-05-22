@@ -1,15 +1,8 @@
 venv/*
-<<<<<<< HEAD
 *.idea/*
-idea/misc.xml
-detector/__pycache__/*
-detector/utils/__pycache__/*
-detector/models/__pycache__/*
-=======
-.idea/*
+.idea/misc.xml
 __pycache__/*
-detector/__pycache__/*
-detector/models/__pycache__/*
-detector/utils/__pycache__/*
-router/__pycache__/*
->>>>>>> d15db640a7481f0f18d74954c79a067046b4425f
+.detector/__pycache__/*
+.detector/models/__pycache__/*
+.detector/utils/__pycache__/*
+.router/__pycache__/*
