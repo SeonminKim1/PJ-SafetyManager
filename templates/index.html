@@ -85,6 +85,8 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
+
+                    $('#predict_box').css('margin', '5px 10px 10px 10px');
                     alert(response['result'])
                     change_area_css()
                     let video_src = response['video']
@@ -105,15 +107,15 @@
                     video.load();
                     pre_video.load();
 
-                    $('#video_box').css('height', '400px');
-                    $('#video_box').css('width', '400px');
-                    $('#video_box').css('margin', '5px 10px 5px 10px');
-                    $('#video_box').css('display', 'flex');
+                    $('#video_tag').css('height', '400px');
+                    $('#video_tag').css('width', '400px');
+                    $('#video_tag').css('margin', '5px 10px 5px 10px');
+                    $('#video_box').css('display', 'block');
 
-                    $('#pre_video_box').css('height', '400px');
-                    $('#pre_video_box').css('width', '400px');
-                    $('#pre_video_box').css('margin', '5px 10px 10px 10px');
-                    $('#pre_video_box').css('display', 'flex');
+                    $('#pre_video_tag').css('height', '400px');
+                    $('#pre_video_tag').css('width', '400px');
+                    $('#pre_video_tag').css('margin', '5px 10px 10px 10px');
+                    $('#pre_video_box').css('display', 'block');
 
 
                     results = response["results"]
@@ -141,12 +143,12 @@
             <div id="upload_div"><img class="test" id="upload_box" src="" alt=""></div>
             <div id="predict_div"><img class="test" id="predict_box" src="" alt=""></div>
             <div id="video_box" style="display: none">
-                <video id="video_tag" controls muted>
+                <video id="video_tag" autoplay controls muted>
                     <source id="vid_src" src='' type="video/mp4">
                 </video>
             </div>
             <div id="pre_video_box" style="display: none">
-                <video id="pre_video_tag" controls muted >
+                <video id="pre_video_tag" autoplay controls muted >
                     <source id="pre_vid_src" src='' type="video/mp4">
                 </video>
             </div>
