@@ -159,10 +159,8 @@ def run(
                         results.append(names[c]) # Customize
                         label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}') 
                         # Customize
-                        print('===1',label)
                         if ((label is not None) and ('head' in label)):
                             label = label.replace('head', 'No helmet')
-                            print('===2', label)
 
                         annotator.box_label(xyxy, label, color=colors(c, True))
                         
