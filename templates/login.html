@@ -28,14 +28,14 @@
                 success: function (response) {
                     if (response['result'] == 'success') {
                         alert('토큰 생성 완료!')
-                        alert(response['token'])
+                        // alert(response['token'])
                         // 토큰이 정상적으로 발급되면, 'token' 토큰을 받아 쿠키에 저장
                         document.cookie = 'mytoken='+response['token']+';path=/'
-                        alert(response['msg']);
                         window.location.replace('/')
                     } else {
                         // 로그인 실패 시
                         alert(response['msg']);
+                        window.location.replace('/user/login')
                     }
                 }
             })
