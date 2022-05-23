@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify, redirect, url_for
+import jwt
+import hashlib
 import certifi
 from werkzeug.utils import secure_filename
 from datetime import datetime
