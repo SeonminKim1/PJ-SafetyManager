@@ -1,5 +1,5 @@
 /* modal img  */
-.modal_post_img_div {
+.modal_result_img_div {
     background-color: black;
     height: 100%;
     width: 100%;
@@ -10,110 +10,15 @@
     align-items: center;
 }
 
-.modal-feed-img {
+.modal_result_img {
     object-fit: contain;
     object-position: center;
     /*vertical-align: middle;*/
     height: 100%;
     width: 100%;
-
 }
 
-/* POST 모달 Content 전체 */
-.modal_post_content_div {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    background: white;
-    margin: 0 0 0 5px;
-    height: 100%;
-}
-
-/* Profile / Header */
-.modal_feed_header_div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 20px 5px 0 5px;
-    padding: 0 0 20px 0;
-    border-bottom: 1px solid gray;
-}
-
-.modal_feed_profile_div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 0 5px 0 5px;
-}
-
-.modal_profile {
-    width: 100%;
-    height: 100%;
-    border-radius: 70%;
-    object-fit: cover;
-}
-
-#modal_tag_a {
-    text-decoration: none;
-    color: black;
-}
-
-/* Content 전체 */
-.modal_feed_content_div {
-    margin: 20px 5px 20px 5px;
-    text-align: left;
-    font-size: 16px;
-    height: 600px;
-    border-bottom: 1px solid gray;
-}
-
-.modal_feed_like_bookmark_div {
-    margin: 10px 5px 10px 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between
-}
-
-.modal_feed_like_div {
-    margin: 10px 5px 10px 5px;
-    text-align: left;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-/* Reply */
-.modal_feed_reply_div {
-    margin: 10px 5px 10px 5px;
-    text-align: left;
-    font-size: 14px;
-}
-
-.modal_feed_reply_write_div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 0 20px 0;
-    padding: 5px 0 5px 0;
-    border-bottom: solid 1px gray;
-    border-top: solid 1px gray;
-}
-
-.modal_feed_reply_write {
-    box-shadow: none;
-    border: none;
-    outline: none;
-}
-
-.modal_feed_reply_upload {
-    width: 50px;
-    color: #1DA0f6;
-    font-weight: bold;
-    border: none;
-    background-color: #FFFFFF;
-}
-
-.modal_feed_close {
+.modal_result_close {
     text-align: center;
     margin: 0 0 15px 0;
 }

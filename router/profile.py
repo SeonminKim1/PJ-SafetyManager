@@ -26,7 +26,7 @@ def profile():
 
     user_info = db.USER.find_one({"id": 'jaehyun'})  # id, num, nickname, feed_images, content, like, reply
     print(user_info)
-    results = sorted(list(db.result.find({'company': user_info['company']})), key=lambda x: x['date'], reverse=True)
+    results = sorted(list(db.RESULT.find({'company': user_info['company']})), key=lambda x: x['date'], reverse=True)
     print(results)
 
     for i, res in enumerate(results):
