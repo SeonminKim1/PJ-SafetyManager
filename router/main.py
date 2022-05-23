@@ -34,6 +34,7 @@ def file_upload():
     # DB에 Upload Path 저장
     doc = {
         'id': 'id',
+        'num': 0,
         'company': 'samsung',
         'helmet': None,
         'head': None,
@@ -66,6 +67,7 @@ def video_upload():
     # DB에 Upload Path 저장
     doc = {
         'id': 'id',
+        'num': 0,
         'company': 'samsung',
         'helmet': None,
         'head': None,

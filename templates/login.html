@@ -13,26 +13,20 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script>
-        {#document.addEventListener("DOMContentLoaded", function () {})#}
-        $(document).ready(function () {
-            login()
-        })
-
         function login() {
             let id = $('#id').val()
-            let company = $('#company').val()
             let pwd = $('#pwd').val()
 
             $.ajax({
                 type: "POST",
-                url: "/api/login",
-                data: { id_give: id, company_give: company, pwd_give: pwd},
+                url: "/user/api/login",
+                data: {'id_give': id, 'pwd_give': pwd},
                 success: function (response) {
                     if (response['result'] == 'success') {
-                        {#alert('토큰 생성 완료!')#}
+                        alert('토큰 생성 완료!')
                         // 토큰이 정상적으로 발급되면, 'token' 토큰을 받아 쿠키에 저장
                         $.cookie('mytoken', response['token']);
-                        {#alert(response['msg']);#}
+                        alert(response['msg']);
                         window.location.replace('/')
                     } else {
                         // 로그인 실패 시
@@ -41,7 +35,6 @@
                 }
             })
         }
-
     </script>
 </head>
 
@@ -53,12 +46,12 @@
     </div>
     <!-- login container -->
     <form id="form">
-        <input type="text" class="text_field" name="email" placeholder="아이디">
-        <input type="password" class="text_field" name="password" placeholder="비밀번호">
-        <input type="submit" class="submit_btn" onclick="login()" value="로그인">
+        <input type="text" class="text_field" id="id" placeholder="아이디">
+        <input type="password" class="text_field" id="pwd" placeholder="비밀번호">
+        <input type="button" class="submit_btn" onclick="login()" value="로그인">
     </form>
     <div class="join_container">
-        <a href="/join">가입하기</a>
+        <a href="/user/join">가입하기</a>
     </div>
 </main>
 </body>

@@ -1,3 +1,17 @@
+<script>
+    function logout() {
+         $.ajax({
+             type: "GET",
+             url: '/user/logout',
+             data: {},
+             success: function (response) {
+                 $.removeCookie('mytoken');
+                 window.location.href = '/user/login'
+             }
+         })
+    }
+</script>
+
 <nav>
     <div class="nav_head">
         <div class="nav_logo">
@@ -7,7 +21,7 @@
         <div class="nav_menu">
             <a href="/profile/"><p>사용자님</p></a>
             <a href="/ranking/"><p>Safety Ranking</p></a>
-            <p>Logout</p>
+            <p onclick="logout()">Logout</p>
         </div>
     </div>
 </nav>
