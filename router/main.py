@@ -15,8 +15,6 @@ client = MongoClient(
     tlsCAFile=certifi.where())
 db = client.od_project
 
-from detector.detect import detect_run
-
 bp = Blueprint("main", __name__, url_prefix="/main")
 
 @bp.route('/api/img/upload', methods=['POST'])
@@ -33,27 +31,20 @@ def file_upload():
     upload_path = 'static/upload_data/' + filename + '.' + extension
     file.save(upload_path) # 'static/upload_data/test1.jpg
 
-    predict_path, results = detect_run(WEIGHTS_PATH, upload_path, False)
-    predict_path = predict_path + '/' + filename + '.' + extension
-    print('WEIGHTS_PATH: ', WEIGHTS_PATH)
-    print('upload_path: ', upload_path)
-    print('predict_path: ', predict_path)
-    print('results', results)
-    
-    # DB에 Image Path 저장
+    # DB에 Upload Path 저장
     doc = {
         'id': 'id',
         'company': 'samsung',
-        'helmet': int(results['helmet']),
-        'head': int(results['head']),
-        'score': float(results['score']),
-        'isPass': bool(results['isPass']),
+        'helmet': None,
+        'head': None,
+        'score': None,
+        'isPass': None,
         'date': today,
         'upload_path': upload_path,
-        'predict_path': predict_path
+        'predict_path': None
     }
     db.result.insert_one(doc)
-    return jsonify({'result':'success', 'predict_path': predict_path, 'results':results})
+    return jsonify({'result':'success', 'upload_path':upload_path, 'msg': '업로드가 완료 되었습니다.'})
 
 @bp.route("/api/video/upload", methods=['POST'])
 def video_upload():
@@ -72,24 +63,17 @@ def video_upload():
     upload_path = 'static/upload_data/' + filename + '.' + extension
     file.save(upload_path)  # 'static/upload_data/test1.jpg
 
-    predict_path, results = detect_run(WEIGHTS_PATH, upload_path, True)
-    predict_path = predict_path + '/' + filename + '.' + extension
-    print('WEIGHTS_PATH: ', WEIGHTS_PATH)
-    print('upload_path: ', upload_path)
-    print('predict_path: ', predict_path)
-    print('results', results)
-
-    # DB에 Image Path 저장
+    # DB에 Upload Path 저장
     doc = {
         'id': 'id',
         'company': 'samsung',
-        'helmet': int(results['helmet']),
-        'head': int(results['head']),
-        'score': float(results['score']),
-        'isPass': bool(results['isPass']),
+        'helmet': None,
+        'head': None,
+        'score': None,
+        'isPass': None,
         'date': today,
         'upload_path': upload_path,
-        'predict_path': predict_path
+        'predict_path': None
     }
     db.result.insert_one(doc)
-    return jsonify({'result': 'success', 'video': upload_path, 'predict_path': predict_path, 'results':results})
+    return jsonify({'result':'success', 'upload_path':upload_path, 'msg': '업로드가 완료 되었습니다.'})

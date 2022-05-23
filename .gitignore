@@ -1,5 +1,6 @@
 venv/*
-.idea/*
+*.idea/*
+idea/misc.xml
 __pycache__/*
 detector/__pycache__/*
 detector/models/__pycache__/*
