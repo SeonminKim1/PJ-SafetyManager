@@ -30,7 +30,7 @@ def img_detect_inference():
     print('results', results)
     
     # DB에 정보 Update
-    db.result.update_one({'upload_path': upload_path}, 
+    db.RESULT.update_one({'upload_path': upload_path}, 
                          {'$set': {
                             'helmet': int(results['helmet']),
                             'head': int(results['head']),
@@ -57,7 +57,7 @@ def video_detect_inference():
     print('results', results)
 
     # DB에 정보 Update
-    db.result.update_one({'upload_path': upload_path}, 
+    db.RESULT.update_one({'upload_path': upload_path}, 
                          {'$set': {
                             'helmet': int(results['helmet']),
                             'head': int(results['head']),
