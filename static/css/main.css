@@ -26,10 +26,11 @@ section {
     background-size: contain;
 }
 .result_box{
-    padding-top:50px;
+    padding:60px 0px 10px 0px;
     color:green;
-    font-size:40px;
+    font-size:80px;
     text-align:center;
+    
 }
 
 .img_box{
@@ -46,7 +47,7 @@ section {
 }
 
 /* main box */
-.main_box{
+.main_box, .main_vid_box{
     width:0px;
     height:0px;
     display: hidden;
@@ -70,7 +71,7 @@ section {
 /* btn */
 .btn_box {
     width: 100%;
-    margin-top: 40px;
+    margin-top: 10px;
     display: flex;
     grid-template-columns: 1fr 1fr;
     justify-content: center;
