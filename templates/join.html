@@ -16,12 +16,13 @@
         function join() {
             // 입력값 변수에 저장 후 보냄
             let id = $('#id').val()
+            let name = $('#name').val()
             let company = $('#company').val()
             let pwd = $('#pwd').val()
             $.ajax({
                 type: "POST",
                 url: "/user/api/join",
-                data: {'id_give': id, 'company_give': company, 'pwd_give': pwd},
+                data: {'id_give': id, 'name_give': name, 'company_give': company, 'pwd_give': pwd},
                 success: function (response) {
                     alert(response["msg"])
                     window.location.href = '/user/login'
@@ -39,7 +40,8 @@
     </div>
     <!-- Join container -->
     <form id="form">
-        <input type="text" id="id" class="text_field" placeholder="아이디">
+        <input type="text" id="id" class="text_field" placeholder="아이디/이메일">
+        <input type="text" id="name" class="text_field" placeholder="이름">
         <input type="text" id="company" class="text_field" placeholder="회사">
         <input type="password" id="pwd" class="text_field" placeholder="비밀번호">
         <input type="button" class="submit_btn" onclick="join()" value="가입하기">
