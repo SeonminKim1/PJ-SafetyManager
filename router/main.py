@@ -34,13 +34,15 @@ def file_upload():
     user_id = request.form["user_id"]
     user_name = request.form["user_name"]
     user_company = request.form["user_company"]
-
+    file_type = request.form["file_type"]
+    
     # DB에 Upload Path 저장
     doc = {
         'id': user_id,
         'name': user_name,
         'num': 0,
         'company': user_company,
+        'file_type': file_type,
         'helmet': None,
         'head': None,
         'score': None,
@@ -69,6 +71,7 @@ def video_upload():
     user_id = request.form["user_id"]
     user_name = request.form["user_name"]
     user_company = request.form["user_company"]
+    file_type = request.form["file_type"]
 
     # DB에 Upload Path 저장
     doc = {
@@ -76,6 +79,7 @@ def video_upload():
         'name': user_name,
         'num': 0,
         'company': user_company,
+        'file_type': file_type,
         'helmet': None,
         'head': None,
         'score': None,

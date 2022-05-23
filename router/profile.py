@@ -38,6 +38,6 @@ def profile():
         return render_template('profile.html', user_info=user_info, results=results)
 
     except jwt.ExpiredSignatureError:  # 해당 token의 로그인 시간이 만료시 login 페이지로 redirect
-        return redirect(url_for("login"))
+        return redirect(url_for("user.login"))
     except jwt.exceptions.DecodeError:  # 해당 token이 다르다면 login 페이지로 redirect
-        return redirect(url_for("login"))
+        return redirect(url_for("user.login"))

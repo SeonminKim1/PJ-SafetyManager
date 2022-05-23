@@ -17,8 +17,8 @@
 .name_box {
     width: 100%;
     height: 15%;
-    padding: 30px;
-    font-size: 50px;
+    padding-top: 15px;
+    font-size: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,7 +26,6 @@
 
 .result_list {
     width: 100%;
-    height: 250px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
@@ -34,7 +33,7 @@
 
 .result_list .post {
     width: 100%;
-    height: 250px;
+    height: 270px;
     border: none;
     overflow: hidden;
     margin-bottom: 0;
@@ -44,7 +43,14 @@
 
 .result_list img {
     width: 100%;
-    height: 150px;
+    height: 140px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.result_list video {
+    width: 100%;
+    height: 140px;
     object-fit: cover;
     object-position: center;
 }

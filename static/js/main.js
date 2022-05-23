@@ -81,7 +81,7 @@ function preview() {
     $('#helmet_value').text('0')
     $('#head_value').text('0')
     $('#score_value').text('0.0')
-    $('#isPass_value').text('None')
+    $('#isPass_value').text('UnKnown')
     $('#isPass_value').css({'color':'white'})
 }
 
@@ -97,6 +97,7 @@ function posting(user_info) {
     
     // check images or video
     if (file.type.match(/image.*/)) {
+        form_data.append("file_type", 'image')
         $.ajax({ // 비동기 방식
             type: "POST",
             url: "/main/api/img/upload",
@@ -109,6 +110,7 @@ function posting(user_info) {
             }
         });
     } else {
+        form_data.append("file_type", 'video')
         $.ajax({
             type: "POST",
             url: "/main/api/video/upload",
