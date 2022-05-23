@@ -25,7 +25,19 @@ db = client.od_project
 
 @app.route('/')
 def home():
-    return render_template('/index.html')
+    # 현재 컴퓨터에 저장 된 'mytoken'인 쿠키 확인
+    token_receive = request.cookies.get('mytoken')
+    print('token_receive', token_receive)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.USER.find_one({"id": payload['id']})  # id, name, pwd, company
+        return render_template('/index.html')
+    except jwt.ExpiredSignatureError:  # 해당 token의 로그인 시간이 만료시 login 페이지로 redirect
+        print('1')
+        return redirect(url_for("user.login"))
+    except jwt.exceptions.DecodeError:  # 해당 token이 다르다면 login 페이지로 redirect
+        print('2')
+        return redirect(url_for("user.login"))
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
