@@ -49,3 +49,12 @@ nav {
 .nav_menu p {
     cursor: pointer;
 }
+
+a {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    color: lightgrey;
+}
