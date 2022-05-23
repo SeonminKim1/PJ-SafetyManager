@@ -28,26 +28,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 </head>
-<script>
-    // result Modal Func
-    function result_modal_func(result_num) {
-        console.log(result_num, typeof (result_num))
-        document.querySelector('.modal_post_' + result_num).style.display = 'flex';
-        document.querySelector('.modal_overlay_' + result_num).style.display = 'block';
-        document.querySelector('.modal_overlay_' + result_num).style.top = window.pageYOffset + 'px';
-    }
-
-    function result_modal_func_off(result_num) {
-        console.log(result_num, typeof (result_num))
-        document.querySelector('.modal_post_' + result_num).style.display = 'none';
-        document.querySelector('.modal_overlay_' + result_num).style.display = 'none';
-        document.querySelector('.modal_overlay_' + result_num).style.top = window.pageYOffset + 'px';
-    }
-
-
-</script>
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 
 <body>
 {% include 'nav.html' %}
@@ -68,40 +51,30 @@
                     height:600px;
                     margin:60px auto auto auto;
                     border: 1px solid black;
-                    background-color: white;">
+                    background-color: #C0C0C0;">
 
             <!-- modal content -->
-            <div class="modal_result_img_div">
-                <img class="modal_result_img" src="{{ my_result.upload_path }}">
-                <div class="result_box">
+            <div class="modal_box">
+                <div class="result_box_modal">
                     <label id='result_label'>Safety Manager</label>
                 </div>
-                <div class="img_box"></div>
-                <div class="main_box">
-                    <div id="upload_div"><img class="test" id="upload_img" src="" alt=""></div>
-                    <div id="predict_div"><img class="test" id="predict_img" src="" alt=""></div>
+                <div class="main_box_modal">
+                    <img id="upload_img" src="{{ my_result.upload_path }}" alt="업로드사진">
+                    <img id="predict_img" src="{{ my_result.predict_path }}" alt="추론사진">
                 </div>
-                <div class="main_vid_box">
-                    <div id="upload_vid_div">
-                        <video id="upload_vid" controls muted preload="auto">
-                            <source id="upload_vid_src" src="" type="video/mp4">
-                        </video>
-                    </div>
-                    <div id="predict_vid_div">
-                        <video id="predict_vid" controls muted preload="auto">
-                            <source id="predict_vid_src" src="" type="video/mp4">
-                        </video>
-                    </div>
+                {#                <div class="main_vid_box_modal">#}
+                {#                <video id="upload_vid" controls muted preload="metadata" src="{{ my_result.upload_path }}"></video>#}
+                {#                <video id="predict_vid" controls muted preload="metadata" src="{{ my_result.predict_path }}"></video>#}
+                {#                </div>#}
+                <div class="score_box_modal">
+                    <div class='score_label_modal'>Helmet : {{ my_result.helmet }}</div>
+                    <div class='score_label_modal'>No Helmet : {{ my_result.head }}</div>
+                    <div class='score_label_modal'>Score : {{ my_result.score }}</div>
+                    <div class='score_label_modal'>Safety : {{ my_result.isPass }}</div>
                 </div>
-                <div class="score_box">
-                    <label class='score_label'>Helmet : </label><span class='score_value' id="helmet_value">0</span>
-                    <label class='score_label'>No Helmet : </label><span class='score_value' id="head_value">0</span>
-                    <label class='score_label'>Score : </label><span class='score_value' id="score_value">0.0</span>
-                    <label class='score_label'>Safety : </label><span class='score_value' id="isPass_value">none</span>
+                <div class="modal_result_close" onclick="result_modal_func_off('{{ my_result.num }}')">
+                    Close
                 </div>
-            </div>
-            <div class="modal_result_close" onclick="result_modal_func_off('{{ my_result.num }}')">
-                Close
             </div>
         </div>
     </div>
@@ -109,8 +82,6 @@
 
 <section>
     <div class="container">
-        <!-- box 종류 -->
-        <!-- result_box img_box, main_box, loading_box, score_box, btn_box -->
         <div>
             <div class="profile_box">
                 <div class="name_box">
@@ -122,11 +93,11 @@
                         <div class="post" onclick="result_modal_func('{{ my_result.num }}')">
                             <img src="{{ my_result.predict_path }}" alt="게시물없음">
                             <p>생성일: {{ my_result.date }}</p>
-                            <p>안전도: {{ my_result.score }}</p>
-                            <p>작성자: {{ my_result.id }}</p>
+                            <p>안전도: {{ my_result.score }}%</p>
+                            <p>작성자: {{ my_result.name }}</p>
                         </div>
                     {% endfor %}
-                </div> <!-- container -->
+                </div>
             </div>
         </div>
     </div>

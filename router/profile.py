@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, render_template, redirect, url_for
 import jwt
 from flask import Blueprint
 from werkzeug.utils import secure_filename
@@ -21,17 +21,23 @@ bp = Blueprint("profile", __name__, url_prefix="/profile")
 
 @bp.route('/', methods=['GET'])
 def profile():
-    # token_receive = request.cookies.get('mytoken')
-    # payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    token_receive = request.cookies.get('mytoken')
+    print('token_receive', token_receive)
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
 
-    user_info = db.USER.find_one({"id": 'jaehyun'})  # id, num, nickname, feed_images, content, like, reply
-    print(user_info)
-    results = sorted(list(db.RESULT.find({'company': user_info['company']})), key=lambda x: x['date'], reverse=True)
-    print(results)
+        user_info = db.USER.find_one({"id": payload['id']})  # id, num, nickname, feed_images, content, like, reply
+        print(user_info)
+        results = sorted(list(db.RESULT.find({'company': user_info['company']})), key=lambda x: x['date'], reverse=True)
+        print(results)
 
-    for i, res in enumerate(results):
-        results[i]['predict_path'] = '../' + str(res['predict_path'])
-        print(results[i]['predict_path'])
+        for i, res in enumerate(results):
+            results[i]['upload_path'] = '../' + str(res['upload_path'])
+            results[i]['predict_path'] = '../' + str(res['predict_path'])
 
+        return render_template('profile.html', user_info=user_info, results=results)
 
-    return render_template('profile.html', user_info=user_info, results = results)
+    except jwt.ExpiredSignatureError:  # 해당 token의 로그인 시간이 만료시 login 페이지로 redirect
+        return redirect(url_for("login"))
+    except jwt.exceptions.DecodeError:  # 해당 token이 다르다면 login 페이지로 redirect
+        return redirect(url_for("login"))

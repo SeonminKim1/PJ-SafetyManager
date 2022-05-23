@@ -1,24 +1,63 @@
-/* modal img  */
-.modal_result_img_div {
-    background-color: black;
+.modal_box {
+    background-color: #C0C0C0;
     height: 100%;
     width: 100%;
-    margin: 0 5px 0 0;
-    line-height: 1000px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.modal_result_img {
-    object-fit: contain;
-    object-position: center;
-    /*vertical-align: middle;*/
-    height: 100%;
-    width: 100%;
-}
+/*.modal_result_img {*/
+/*    object-fit: contain;*/
+/*    object-position: center;*/
+/*    height: 100%;*/
+/*    width: 100%;*/
+/*}*/
 
 .modal_result_close {
     text-align: center;
-    margin: 0 0 15px 0;
+    margin-top: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.result_box_modal {
+    width: 100%;
+    height: 13%;
+    margin-top: 5px;
+    padding: 10px;
+    color: blue;
+    font-size: 40px;
+    text-align: center;
+}
+
+
+/* main box */
+.main_box_modal, .main_vid_box_modal {
+    width: 95%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+}
+
+.main_box_modal img, video {
+    width: 416px;
+    height: 416px;
+    margin: auto;
+    object-fit: fill;
+    object-position: center;
+}
+
+
+/* score */
+.score_box_modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+}
+
+.score_label_modal {
+    margin: 5px 10px;
 }
