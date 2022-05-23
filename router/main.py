@@ -34,6 +34,7 @@ def file_upload():
     # DB에 Upload Path 저장
     doc = {
         'id': 'id',
+        'num': 0,
         'company': 'samsung',
         'helmet': None,
         'head': None,
@@ -43,7 +44,7 @@ def file_upload():
         'upload_path': upload_path,
         'predict_path': None
     }
-    db.result.insert_one(doc)
+    db.RESULT.insert_one(doc)
     return jsonify({'result':'success', 'upload_path':upload_path, 'msg': '업로드가 완료 되었습니다.'})
 
 @bp.route("/api/video/upload", methods=['POST'])
@@ -66,6 +67,7 @@ def video_upload():
     # DB에 Upload Path 저장
     doc = {
         'id': 'id',
+        'num': 0,
         'company': 'samsung',
         'helmet': None,
         'head': None,
@@ -75,5 +77,5 @@ def video_upload():
         'upload_path': upload_path,
         'predict_path': None
     }
-    db.result.insert_one(doc)
+    db.RESULT.insert_one(doc)
     return jsonify({'result':'success', 'upload_path':upload_path, 'msg': '업로드가 완료 되었습니다.'})

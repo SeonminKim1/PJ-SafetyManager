@@ -22,16 +22,24 @@ def img_detect_inference():
     upload_path = request.form['upload_path']
     filename, extension = upload_path.replace('static/upload_data', '').split('.')
  
-    predict_path, results = detect_run(WEIGHTS_PATH, upload_path, False)
+    predict_path, results = detect_run(WEIGHTS_PATH, upload_path)
     predict_path = predict_path + '/' + filename + '.' + extension
     print('WEIGHTS_PATH: ', WEIGHTS_PATH)
     print('upload_path: ', upload_path)
     print('predict_path: ', predict_path)
     print('results', results)
-    
+
+    # Num 정보 Update
+    num_length = list(db.RESULT.find({}))
+    if len(num_length)==0:
+        num = 1
+    else:
+        num = len(num_length) + 1
+
     # DB에 정보 Update
-    db.result.update_one({'upload_path': upload_path}, 
+    db.RESULT.update_one({'upload_path': upload_path}, 
                          {'$set': {
+                            'num': num,
                             'helmet': int(results['helmet']),
                             'head': int(results['head']),
                             'score': float(results['score']),
@@ -49,16 +57,24 @@ def video_detect_inference():
     filename, extension = upload_path.replace('static/upload_data', '').split('.')
     upload_path = 'static/upload_data/' + filename + '.' + extension
  
-    predict_path, results = detect_run(WEIGHTS_PATH, upload_path, True)
+    predict_path, results = detect_run(WEIGHTS_PATH, upload_path)
     predict_path = predict_path + '/' + filename + '.' + extension
     print('WEIGHTS_PATH: ', WEIGHTS_PATH)
     print('upload_path: ', upload_path)
     print('predict_path: ', predict_path)
     print('results', results)
 
+    # Num 정보 Update
+    num_length = list(db.RESULT.find({}))
+    if len(num_length)==0:
+        num = 1
+    else:
+        num = len(num_length) + 1
+
     # DB에 정보 Update
-    db.result.update_one({'upload_path': upload_path}, 
+    db.RESULT.update_one({'upload_path': upload_path}, 
                          {'$set': {
+                            'num': num,
                             'helmet': int(results['helmet']),
                             'head': int(results['head']),
                             'score': float(results['score']),
