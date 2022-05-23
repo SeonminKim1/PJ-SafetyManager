@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, render_template
 from flask import Blueprint
 from werkzeug.utils import secure_filename
 from datetime import datetime
+import datetime
 import certifi
 from operator import itemgetter
 import pymongo
@@ -38,16 +39,24 @@ def ranking():
     # 각 기업의 결과 중 최고점수만 분류
     company_high_score = []
     for company_name in company_list:
-        company_info = list(db.RESULT.find({'company': company_name}, {'company': True, 'score': True, '_id': False}))
+        company_info = list(db.RESULT.find({'company': company_name}, {'company': True,
+                                                                       'score': True,
+                                                                       'date': True,
+                                                                       '_id': False}))
         print(company_info)
+
+        # 오늘의 월만 추출하여 문자열화
+        today_month = str(datetime.date.today().month)
+
         # 기업의 평균 score 저장
         avg_score = {'company': company_name, 'score': 0}
         score_total = 0.0
 
         for company in company_info:
-            if company['score'] is not None:
-                score_total = company['score'] + score_total
-                avg_score['score'] = round(score_total / len(company_info), 3)
+            if company['score'] is not None: # score값이 Null인 경우 방지
+                if company['date'][5:7] == today_month.zfill(2): # 저장되어있는 월과 오늘 월이 같을 경우만
+                    score_total = company['score'] + score_total
+                    avg_score['score'] = round(score_total / len(company_info), 3)
 
         company_high_score.append(avg_score)
         # 데이터 score를 기준으로 내림 차순
@@ -77,4 +86,5 @@ def ranking():
                            start_page=start_page,
                            end_page=end_page,
                            page_count=page_count,
-                           page_block=page_block)
+                           page_block=page_block,
+                           today_month=today_month)

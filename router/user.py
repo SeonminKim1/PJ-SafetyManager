@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect, url_for, make_response
 from flask import Blueprint
 import jwt
 import hashlib
@@ -75,8 +75,11 @@ def api_login():
             'id': id_receive,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=1800)
         }
+        print(payload)
         # 토큰 생성 payload의 값 인코딩, 암호키 필수 유출금지!, 암호화형태 지정
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        print(token)
+
         return jsonify({'result': 'success', 'token': token, 'msg': '로그인 성공'})
     else:
         return jsonify({'result': 'fail', 'msg': '아이디 또는 비밀번호가 일치하지 않습니다.'})
