@@ -87,10 +87,14 @@ function preview() {
 
 var upload_path = ''
 // Upload UX #2 - Upload to Server
-function posting() {
+function posting(user_info) {
     let file = $('#file')[0].files[0] // 'if you view filename => file['name'] => test3.jpg
     let form_data = new FormData() // FormData 처럼 보내는 방식
     form_data.append("file", file) // console.log(file, typeof (file))
+    form_data.append("user_id", user_info['id'])
+    form_data.append("user_name", user_info['name'])
+    form_data.append("user_company", user_info['company'])
+    
     // check images or video
     if (file.type.match(/image.*/)) {
         $.ajax({ // 비동기 방식

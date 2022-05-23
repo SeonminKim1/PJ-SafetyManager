@@ -5,7 +5,6 @@ from datetime import datetime
 import certifi
 
 SECRET_KEY = '$lucky7'
-WEIGHTS_PATH = 'detector/weights/best.pt'
 
 # DB 연결 코드
 from pymongo import MongoClient
@@ -31,11 +30,17 @@ def file_upload():
     upload_path = 'static/upload_data/' + filename + '.' + extension
     file.save(upload_path) # 'static/upload_data/test1.jpg
 
+    # user 정보 
+    user_id = request.form["user_id"]
+    user_name = request.form["user_name"]
+    user_company = request.form["user_company"]
+
     # DB에 Upload Path 저장
     doc = {
-        'id': 'id',
+        'id': user_id,
+        'name': user_name,
         'num': 0,
-        'company': 'samsung',
+        'company': user_company,
         'helmet': None,
         'head': None,
         'score': None,
@@ -49,13 +54,9 @@ def file_upload():
 
 @bp.route("/api/video/upload", methods=['POST'])
 def video_upload():
-    print('video_upload()실행')
-    file = request.files['file']  # werkzeug.datastructures.FileStorage, name
-    print(file) # 전체적인 파일의 개요 확인
+    file = request.files['file']  # print(file) # 전체적인 파일의 개요 확인
     extension = secure_filename(file.filename).split('.')[-1]  # file.filename /
-    print(extension) #확장자만 추출
     f_name = file.filename.replace('.' + extension, '')  # test1, 확장자 제거
-    print(f_name) #파일명만 추출
 
     # 파일 이름 , Local에 Upload 한 이미지 저장
     today = datetime.now()
@@ -64,11 +65,17 @@ def video_upload():
     upload_path = 'static/upload_data/' + filename + '.' + extension
     file.save(upload_path)  # 'static/upload_data/test1.jpg
 
+    # user 정보 
+    user_id = request.form["user_id"]
+    user_name = request.form["user_name"]
+    user_company = request.form["user_company"]
+
     # DB에 Upload Path 저장
     doc = {
-        'id': 'id',
+        'id': user_id,
+        'name': user_name,
         'num': 0,
-        'company': 'samsung',
+        'company': user_company,
         'helmet': None,
         'head': None,
         'score': None,
