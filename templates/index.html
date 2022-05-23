@@ -13,6 +13,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/static/css/nav.css">
     <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/loading_bar.css">
 
     <!--파비콘-->
     <link rel="icon" href="/static/css/img/Safety-manager.png" type="image/x-icon">
@@ -25,133 +26,39 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
 </head>
-<script>
-    function change_area_css() {
-        $('.img_box').hide()
-        $('.main_box').show()
-        $('.main_box').css('display', 'flex');
-        $('.main_box').css('height', '500px');
-        $('.main_box').css('width', '100%');
-        $('.main_box').css('padding-bottom', '40px');
-        $('.main_box').css('flex-direction', 'row');
-        $('.main_box').css('justify-content', 'center');
-        $('.main_box').css('align-items', 'center');
-    }
 
-    function posting() {
-        let file = $('#file')[0].files[0]
-        //let filename = file['name']
-        let form_data = new FormData() // FormData 처럼 보내는 방식
-        //form_data.append("f_name", filename)
-        form_data.append("file", file)
-        console.log(file, typeof (file))
-        //console.log(filename, typeof(filename)) // test3.jpg
-        if (file.type.match(/image.*/)) {
-            $.ajax({ // 비동기 방식
-                type: "POST",
-                url: "/main/api/img/upload",
-                data: form_data,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    alert(response["result"])
-                    change_area_css()
-                    predict_path = response["predict_path"]
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
 
-                    $('#upload_box').css('height', '400px');
-                    $('#upload_box').css('width', '400px');
-                    $('#upload_box').css('margin', '5px 10px 5px 10px');
-
-                    $('#predict_box').css('height', '400px');
-                    $('#predict_box').css('width', '400px');
-                    $('#predict_box').css('margin', '5px 10px 10px 10px');
-
-                    $('#upload_box').attr("src", window.URL.createObjectURL(file));
-                    $('#predict_box').attr("src", predict_path)
-                    // window.location.reload()
-                    results = response["results"]
-                    $('#helmet_value').text(results['helmet'])
-                    $('#head_value').text(results['head'])
-                    $('#score_value').text(results['score'])
-                    $('#isPass_value').text(results['isPass'])
-                    $('#result_label').text(results['isPass'])
-                }
-            });
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "/main/api/video/upload",
-                data: form_data,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-
-                    $('#predict_box').css('margin', '5px 10px 10px 10px');
-                    alert(response['result'])
-                    change_area_css()
-                    let video_src = response['video']
-                    let predict_src = response['predict_path']
-                    {#let upload_temp_html = `<video id="upload_preview" autoplay controls muted preload="auto">#}
-                    {#                        <source src="${video_src}" type="video/mp4">#}
-                    {#                        지원되지 않는 브라우저 입니다.</video>`#}
-                    {#let predict_temp_html = `<video id="predict_preview" autoplay controls muted preload="auto">#}
-                    {#                        <source src="${predict_src}" type="video/mp4">#}
-                    {#                        지원되지 않는 브라우저 입니다.</video>`#}
-                    {#$('#upload_div').html(upload_temp_html)#}
-                    {#$('#predict_div').html(predict_temp_html)#}
-                    var video = document.getElementById('video_tag');
-                    var pre_video = document.getElementById('pre_video_tag');
-
-                    $("#vid_src").attr("src", video_src)
-                    $("#pre_vid_src").attr("src", predict_src)
-                    video.load();
-                    pre_video.load();
-
-                    $('#video_tag').css('height', '400px');
-                    $('#video_tag').css('width', '400px');
-                    $('#video_tag').css('margin', '5px 10px 5px 10px');
-                    $('#video_box').css('display', 'block');
-
-                    $('#pre_video_tag').css('height', '400px');
-                    $('#pre_video_tag').css('width', '400px');
-                    $('#pre_video_tag').css('margin', '5px 10px 10px 10px');
-                    $('#pre_video_box').css('display', 'block');
-
-
-                    results = response["results"]
-                    $('#helmet_value').text(results['helmet'])
-                    $('#head_value').text(results['head'])
-                    $('#score_value').text(results['score'])
-                    $('#isPass_value').text(results['isPass'])
-                }
-            })
-        }
-    }
-
-</script>
 <body>
 {% include 'nav.html' %}
 
 <section>
     <div class="container">
+        <!-- box 종류 -->
+        <!-- result_box img_box, main_box, loading_box, score_box, btn_box -->
         <div class="result_box">
-            <label id='result_label'>PASS</label>
+            <label id='result_label'>Safety Manager</label>
         </div>
-
         <div class="img_box"></div>
         <div class="main_box">
-            <div id="upload_div"><img class="test" id="upload_box" src="" alt=""></div>
-            <div id="predict_div"><img class="test" id="predict_box" src="" alt=""></div>
-            <div id="video_box" style="display: none">
-                <video id="video_tag" autoplay controls muted>
-                    <source id="vid_src" src='' type="video/mp4">
+            <div id="upload_div"><img class="test" id="upload_img" src="" alt=""></div>
+            <div id="predict_div"><img class="test" id="predict_img" src="" alt=""></div>
+        </div>
+        <div class="main_vid_box">
+            <div id="upload_vid_div">
+                <video id="upload_vid" controls muted preload="auto">
+                    <source id="upload_vid_src" src="" type="video/mp4">
                 </video>
             </div>
-            <div id="pre_video_box" style="display: none">
-                <video id="pre_video_tag" autoplay controls muted >
-                    <source id="pre_vid_src" src='' type="video/mp4">
+            <div id="predict_vid_div">
+                <video id="predict_vid" controls muted preload="auto">
+                    <source id="predict_vid_src" src="" type="video/mp4">
                 </video>
             </div>
+        </div>
+        <div class="loading_box">
+            <div id="loading_div"></div>
+            <div id="loading_text">loading</div>
         </div>
         <div class="score_box">
             <label class='score_label'>Helmet : </label><span class='score_value' id="helmet_value">0</span>
@@ -163,7 +70,7 @@
         <div class="btn_box">
             <div>
                 <label for="file" class="btn btn_blue">파일 선택</label>
-                <input id="file" type="file" style="display: none">
+                <input id="file" type="file" style="display: none" onChange="preview()">
             </div>
             <div>
                 <button class="btn btn_red" type="button" onclick="posting()">업로드 하기</button>
