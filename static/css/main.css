@@ -25,6 +25,7 @@ section {
     background-position: center;
     background-size: contain;
 }
+
 .result_box{
     padding:60px 0px 10px 0px;
     color:green;
@@ -50,7 +51,7 @@ section {
 .main_box, .main_vid_box{
     width:0px;
     height:0px;
-    display: hidden;
+    display: none;
 }
 
 /* score */

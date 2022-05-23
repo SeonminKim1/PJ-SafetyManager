@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/bee3d4f913.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/nav.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/loading_bar.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
+
+    <!--파비콘-->
+    <link rel="icon" href="/static/css/img/Safety-manager.png" type="image/x-icon">
+
+    <!-- Title -->
+    <title>7Safety Manager</title>
+
+    <!--ajax 연결 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+</head>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+<body>
+{% include 'nav.html' %}
+
+<section>
+    <div class="container">
+        <!-- box 종류 -->
+        <!-- result_box img_box, main_box, loading_box, score_box, btn_box -->
+        <div>
+            <div class="profile_box">
+                <div class="name_box">
+                    <label id='profile_name'>기업명</label>
+                </div>
+                <hr>
+                <div class="result_list">
+                    <div class="post" onclick="">
+                        <img src="https://cdn.pixabay.com/photo/2022/05/11/06/00/flowers-7188503_960_720.jpg" alt="게시물없음">
+                        <p>2022-05-02</p>
+                        <p>13:33:30</p>
+                        <p>이미지</p>
+                    </div>
+                </div> <!-- container -->
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

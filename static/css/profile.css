@@ -1,0 +1,56 @@
+.container > div {
+    width: 65%;
+    height: 100%;
+    margin: auto;
+    padding: 30px;
+}
+
+.profile_box {
+    width: 90%;
+    height: 90%;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.name_box {
+    width: 100%;
+    height: 15%;
+    padding: 30px;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.result_list {
+    width: 100%;
+    height: 250px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.result_list .post {
+    width: 100%;
+    height: 250px;
+    border: none;
+    overflow: hidden;
+    margin-bottom: 0;
+    position: relative;
+    padding: 0;
+}
+
+.result_list img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.result_list p {
+    margin: 5px;
+    color: white;
+    font-size: 15px;
+}

@@ -5,12 +5,13 @@ from datetime import datetime
 from router import main, ranking
 
 # Import detector/main.py, detect.py
-from router import main, detect
+from router import main, detect, profile
 
 app = Flask(__name__)
 
 app.register_blueprint(main.bp) #/main
 app.register_blueprint(ranking.bp) #/ranking
+app.register_blueprint(profile.bp) #/profile
 app.register_blueprint(detect.bp) #/detect
 
 SECRET_KEY = '$lucky7'
