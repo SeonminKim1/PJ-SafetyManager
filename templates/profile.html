@@ -44,12 +44,14 @@
                 </div>
                 <hr>
                 <div class="result_list">
+                    {% for result in results %}
                     <div class="post" onclick="">
-                        <img src="https://cdn.pixabay.com/photo/2022/05/11/06/00/flowers-7188503_960_720.jpg" alt="게시물없음">
-                        <p>2022-05-02</p>
-                        <p>13:33:30</p>
-                        <p>이미지</p>
+                        
+                        <img src ={{ result.predict_path}}>                        
+                        {{ result.date}}
                     </div>
+                    {% endfor %}
+
                 </div> <!-- container -->
             </div>
         </div>
