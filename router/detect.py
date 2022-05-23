@@ -28,10 +28,18 @@ def img_detect_inference():
     print('upload_path: ', upload_path)
     print('predict_path: ', predict_path)
     print('results', results)
-    
+
+    # Num 정보 Update
+    num_length = list(db.RESULT.find({}))
+    if len(num_length)==0:
+        num = 1
+    else:
+        num = len(num_length) + 1
+
     # DB에 정보 Update
     db.RESULT.update_one({'upload_path': upload_path}, 
                          {'$set': {
+                            'num': num,
                             'helmet': int(results['helmet']),
                             'head': int(results['head']),
                             'score': float(results['score']),
@@ -56,9 +64,17 @@ def video_detect_inference():
     print('predict_path: ', predict_path)
     print('results', results)
 
+    # Num 정보 Update
+    num_length = list(db.RESULT.find({}))
+    if len(num_length)==0:
+        num = 1
+    else:
+        num = len(num_length) + 1
+
     # DB에 정보 Update
     db.RESULT.update_one({'upload_path': upload_path}, 
                          {'$set': {
+                            'num': num,
                             'helmet': int(results['helmet']),
                             'head': int(results['head']),
                             'score': float(results['score']),

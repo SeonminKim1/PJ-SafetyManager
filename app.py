@@ -28,7 +28,7 @@ db = client.od_project
 
 @app.route('/main')
 def home():
-    return render_template('/login.html')
+    return render_template('index.html')
 
 
 # ================ Join Page ================ #
