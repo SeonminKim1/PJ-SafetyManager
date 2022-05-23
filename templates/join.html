@@ -20,11 +20,11 @@
             let pwd = $('#pwd').val()
             $.ajax({
                 type: "POST",
-                url: "/api/join",
+                url: "/user/api/join",
                 data: {'id_give': id, 'company_give': company, 'pwd_give': pwd},
                 success: function (response) {
                     alert(response["msg"])
-                    window.location.href = '/login'
+                    window.location.href = '/user/login'
                 }
             })
         }
@@ -45,7 +45,7 @@
         <input type="button" class="submit_btn" onclick="join()" value="가입하기">
     </form>
     <div class="login_container">
-        <a href="/login">로그인하기</a>
+        <a href="/user/login">로그인하기</a>
     </div>
 </main>
 </body>
