@@ -24,7 +24,7 @@ client = MongoClient(
     tlsCAFile=certifi.where())
 db = client.od_project
 
-@app.route('/')
+@app.route('/main')
 def home():
     return render_template('index.html')
 
