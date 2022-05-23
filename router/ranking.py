@@ -27,7 +27,7 @@ def ranking():
     # 기업 리스트를 담을 변수 선언
     company_list = []
     # 모든 결과 불러오기
-    result_list = list(db.result.find({}, {'_id': False}))
+    result_list = list(db.RESULT.find({}, {'_id': False}))
     print(result_list)
     # 결과 리스트에서 기업만 중복제거하여 분류
     for result in result_list:
@@ -38,7 +38,7 @@ def ranking():
     # 각 기업의 결과 중 최고점수만 분류
     company_high_score = []
     for company_name in company_list:
-        company_info = list(db.result.find({'company': company_name}, {'company': True, 'score': True, '_id': False}))
+        company_info = list(db.RESULT.find({'company': company_name}, {'company': True, 'score': True, '_id': False}))
         print(company_info)
         # 기업의 평균 score 저장
         avg_score = {'company': company_name, 'score': 0}
@@ -54,13 +54,27 @@ def ranking():
         sort_data = sorted(company_high_score, key=itemgetter('score'), reverse=True)
     print(sort_data)
 
-    page = request.args.get("page", type=int, default=0)
+    current_page = request.args.get("page", type=int, default=1)
     per_page = 10
-    max_length = len(sort_data)
-    print(max_length)
-    start_page = page * 10
-    top10 = sort_data[start_page: start_page + per_page]
+    rankings = sort_data[current_page - 1: (current_page - 1) + per_page]
+
+    page_block = 1
+    start_page = int((current_page - 1) / page_block * page_block + 1)
+    end_page = start_page + page_block - 1
+    count = len(sort_data)
+
+    remained = 0
+    if count % per_page > 0:
+        remained = 1
+    page_count = count / per_page + remained
+
+    if end_page > page_count:
+        end_page = page_count
 
     return render_template('/ranking.html',
-                           ranking=top10,
-                           page=page)
+                           ranking=rankings,
+                           current_page=current_page,
+                           start_page=start_page,
+                           end_page=end_page,
+                           page_count=page_count,
+                           page_block=page_block)
