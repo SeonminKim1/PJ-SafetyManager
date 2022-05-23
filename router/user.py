@@ -31,6 +31,7 @@ def join():
 @bp.route("/api/join", methods=["POST"])
 def api_join():
     id_receive = request.form['id_give']
+    name_receive = request.form['name_give']
     company_receive = request.form['company_give']
     pwd_receive = request.form['pwd_give']
 
@@ -39,6 +40,7 @@ def api_join():
 
     doc = {
         'id': id_receive,
+        'name': name_receive,
         'company': company_receive,
         'pwd': hashed_pw,
     }
