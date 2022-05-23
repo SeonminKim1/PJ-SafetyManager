@@ -1,4 +1,4 @@
-window.onload = function(){
+$(document).ready(function(){ // onload 보다 우선 싱행됨.
     // result_box, img_box, main_box, loading_box, score_box, btn_box
     $('.result_box').show()     // Safe, Warning Title Box
     $('.img_box').show()        // SafeMake Icon Image
@@ -7,7 +7,7 @@ window.onload = function(){
     $('.loading_box').hide()    // Loading Bar Box in Predict
     $('.score_box').hide()      // Score Box
     $('.btn_box').show()        // Button Box (파일 선택, 업로드, 안전확인)
-}
+});
 
 function preview_css(is_img) {
     $('.score_box').show()

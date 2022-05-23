@@ -240,16 +240,15 @@ def parse_opt():
     return opt
 
 
-def detect_run(weights_path, source_path, is_video):
+def detect_run(weights_path, source_path):
     opt = parse_opt()
     opt.weights = weights_path # 학습한 가중치
     opt.source = source_path # upload img
     # check_requirements(exclude=('tensorboard', 'thop'))
     save_dir, results = run(**vars(opt))
-    if is_video:
-        results = calculate_score(results)
-    else:
-        results = calculate_score(results)
+
+    results = calculate_score(results)
+
     # print('===results', results)
     print('===detect.py', type(save_dir), save_dir)
     return str(save_dir), results
