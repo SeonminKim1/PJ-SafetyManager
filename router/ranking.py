@@ -40,6 +40,7 @@ def ranking():
     for company_name in company_list:
         company_info = list(db.result.find({'company': company_name}, {'company': True, 'score': True, '_id': False}))
         print(company_info)
+        # 기업의 평균 score 저장
         avg_score = {'company': company_name, 'score': 0}
         score_total = 0.0
 
@@ -49,8 +50,10 @@ def ranking():
                 avg_score['score'] = round(score_total / len(company_info), 3)
 
         company_high_score.append(avg_score)
+        # 데이터 score를 기준으로 내림 차순
         sort_data = sorted(company_high_score, key=itemgetter('score'), reverse=True)
     print(sort_data)
+
     page = request.args.get("page", type=int, default=0)
     per_page = 10
     max_length = len(sort_data)
