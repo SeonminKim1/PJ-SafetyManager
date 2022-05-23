@@ -1,17 +1,31 @@
 /* score */
-.ranking_box{
-    display:flex;
+.ranking_box {
+    display: flex;
     flex-direction: row;
     justify-content: center;
-    color:white;
+    color: white;
     font-size: 24px;
 }
 
 /* score */
-.page_btn{
-    display:flex;
+.page_btn {
+    display: flex;
     flex-direction: row;
     justify-content: center;
-    color:white;
+    color: white;
     font-size: 24px;
+}
+
+#result_label {
+    color: white;
+    font-size: 42px;
+}
+
+table {
+    border-top: solid 1px white;
+    width: 500px;
+}
+
+.th_1, .th_2, .th_3 {
+    background-color: green;
 }

@@ -37,7 +37,7 @@
 <section>
     <div class="container">
         <div class="result_box">
-            <label id='result_label'>Ranking</label>
+            <label id='result_label'>{{ today_month }}월의 Safety Ranking</label>
         </div>
 
         <div class="ranking_box">
@@ -45,15 +45,15 @@
                 <tr>
                     <th>순위</th>
                     <th>기업명</th>
-                    <th>점수</th>
+                    <th>안전 지수</th>
                 </tr>
                 {% set indexs = 0 %}
                 {% for rank in ranking %}
                     <tr>
                         {% set indexs = (current_page - 1) * 10 + loop.index %}
-                        <td>{{ indexs }}</td>
-                        <td>{{ rank.company }}</td>
-                        <td>{{ rank.score }}</td>
+                        <th class="th_{{ indexs }}">{{ indexs }}</th>
+                        <th class="th_{{ indexs }}">{{ rank.company }}</th>
+                        <th class="th_{{ indexs }}">{{ rank.score }}</th>
                     </tr>
                 {% endfor %}
             </table>
