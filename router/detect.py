@@ -34,7 +34,7 @@ def img_detect_inference():
     if len(num_length)==0:
         num = 1
     else:
-        num = len(num_length) + 1
+        num = len(num_length)
 
     # DB에 정보 Update
     db.RESULT.update_one({'upload_path': upload_path}, 
@@ -55,10 +55,10 @@ def img_detect_inference():
 def video_detect_inference():
     upload_path = request.form['upload_path']
     filename, extension = upload_path.replace('static/upload_data', '').split('.')
-    upload_path = 'static/upload_data/' + filename + '.' + extension
+    # upload_path = 'static/upload_data/' + filename + '.' + extension
  
     predict_path, results = detect_run(WEIGHTS_PATH, upload_path)
-    predict_path = predict_path + '/' + filename + '.' + extension
+    predict_path = predict_path + filename + '.' + extension
     print('WEIGHTS_PATH: ', WEIGHTS_PATH)
     print('upload_path: ', upload_path)
     print('predict_path: ', predict_path)
@@ -69,7 +69,7 @@ def video_detect_inference():
     if len(num_length)==0:
         num = 1
     else:
-        num = len(num_length) + 1
+        num = len(num_length)
 
     # DB에 정보 Update
     db.RESULT.update_one({'upload_path': upload_path}, 
