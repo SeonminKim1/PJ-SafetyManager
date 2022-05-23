@@ -3,14 +3,16 @@ import jwt
 import certifi
 
 # Import detector/main.py, detect.py
-from router import main, ranking, detect, user
+from router import main, ranking, detect, profile, user
 
 app = Flask(__name__)
 
-app.register_blueprint(main.bp)  # /main
-app.register_blueprint(ranking.bp)  # /ranking
-app.register_blueprint(detect.bp)  # /detect
+app.register_blueprint(main.bp) #/main
+app.register_blueprint(ranking.bp) #/ranking
+app.register_blueprint(profile.bp) #/profile
+app.register_blueprint(detect.bp) #/detect
 app.register_blueprint(user.bp)  # /user
+
 
 SECRET_KEY = '$lucky7'
 WEIGHTS_PATH = 'detector/weights/best.pt'

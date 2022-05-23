@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/bee3d4f913.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/nav.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+    <link rel="stylesheet" href="/static/css/loading_bar.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
+    <link rel="stylesheet" href="/static/css/result_modal.css">
+
+    <!--파비콘-->
+    <link rel="icon" href="/static/css/img/Safety-manager.png" type="image/x-icon">
+
+    <!-- Title -->
+    <title>7Safety Manager</title>
+
+    <!--ajax 연결 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+</head>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+
+<body>
+{% include 'nav.html' %}
+
+{% for my_result in results %}
+    <div class="modal_overlay_{{ my_result.num }}"
+         style="display:none;
+                width:100vw;
+                height:100vh;
+                position:absolute;
+                top:0;
+                left:0;
+                z-index:1;
+                background-color: rgba(0, 0, 0, 0.8);">
+        <div class="modal_post_{{ my_result.num }}"
+             style="display:none;
+                    width:1000px;
+                    height:600px;
+                    margin:60px auto auto auto;
+                    border: 1px solid black;
+                    background-color: #C0C0C0;">
+
+            <!-- modal content -->
+            <div class="modal_box">
+                <div class="result_box_modal">
+                    <label id='result_label'>Safety Manager</label>
+                </div>
+                <div class="main_box_modal">
+                    <img id="upload_img" src="{{ my_result.upload_path }}" alt="업로드사진">
+                    <img id="predict_img" src="{{ my_result.predict_path }}" alt="추론사진">
+                </div>
+                {#                <div class="main_vid_box_modal">#}
+                {#                <video id="upload_vid" controls muted preload="metadata" src="{{ my_result.upload_path }}"></video>#}
+                {#                <video id="predict_vid" controls muted preload="metadata" src="{{ my_result.predict_path }}"></video>#}
+                {#                </div>#}
+                <div class="score_box_modal">
+                    <div class='score_label_modal'>Helmet : {{ my_result.helmet }}</div>
+                    <div class='score_label_modal'>No Helmet : {{ my_result.head }}</div>
+                    <div class='score_label_modal'>Score : {{ my_result.score }}</div>
+                    <div class='score_label_modal'>Safety : {{ my_result.isPass }}</div>
+                </div>
+                <div class="modal_result_close" onclick="result_modal_func_off('{{ my_result.num }}')">
+                    Close
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<section>
+    <div class="container">
+        <div>
+            <div class="profile_box">
+                <div class="name_box">
+                    <label id='profile_name'>{{ user_info.company }}</label>
+                </div>
+                <hr>
+                <div class="result_list">
+                    {% for my_result in results %}
+                        <div class="post" onclick="result_modal_func('{{ my_result.num }}')">
+                            <img src="{{ my_result.predict_path }}" alt="게시물없음">
+                            <p>생성일: {{ my_result.date }}</p>
+                            <p>안전도: {{ my_result.score }}%</p>
+                            <p>작성자: {{ my_result.name }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

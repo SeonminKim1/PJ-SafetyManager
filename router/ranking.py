@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, render_template
+import jwt
 from flask import Blueprint
 from werkzeug.utils import secure_filename
 from datetime import datetime
@@ -25,6 +26,10 @@ bp = Blueprint("ranking", __name__, url_prefix="/ranking")
 
 @bp.route('/', methods=['GET'])
 def ranking():
+    token_receive = request.cookies.get('mytoken')
+    payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+    user_info = db.USER.find_one({'id': payload['id']})
+
     # 기업 리스트를 담을 변수 선언
     company_list = []
     # 모든 결과 불러오기
@@ -87,4 +92,5 @@ def ranking():
                            end_page=end_page,
                            page_count=page_count,
                            page_block=page_block,
-                           today_month=today_month)
+                           today_month=today_month,
+                           user_info=user_info)
