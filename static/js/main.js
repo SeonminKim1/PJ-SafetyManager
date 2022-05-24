@@ -38,7 +38,7 @@ function detect_css(results){
     $('#score_value').text(results['score'])
     var isPass = ''
     if (results['isPass'] == true){
-        isPass = 'Safe'
+        isPass = 'PASS'
         $('#isPass_value').text(isPass); $('#result_label').text(isPass)
         $('#isPass_value').css({'color':'green'}); $('#result_label').css({'color':'green'})
     }else{
@@ -80,8 +80,8 @@ function preview() {
     $('#result_label').css({'color':'green'}) 
     $('#helmet_value').text('0')
     $('#head_value').text('0')
-    $('#score_value').text('0.0')
-    $('#isPass_value').text('UnKnown')
+    $('#score_value').text('0')
+    $('#isPass_value').text('')
     $('#isPass_value').css({'color':'white'})
 }
 
