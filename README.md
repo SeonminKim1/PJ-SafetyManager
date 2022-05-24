@@ -1,5 +1,5 @@
 ### SafetyManager
-'SafetyManager' is a web solution for detecting whether or not wearing a helmet to prevent safety accidents at construction sites. This repository is where we keep a record of our SafetyManager-project progress
+SafetyManager is a web solution for detecting whether or not wearing a helmet to prevent safety accidents at construction sites. This repository is where we keep a record of our SafetyManager-project progress
 
 ## Table of Contents
 - [Project Introduction](#Project-Introduction)
