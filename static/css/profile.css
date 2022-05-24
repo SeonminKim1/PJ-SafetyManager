@@ -1,5 +1,5 @@
-.container > div {
-    width: 65%;
+.profile_warp {
+    width: 80%;
     height: 100%;
     margin: auto;
     padding: 30px;
@@ -16,7 +16,7 @@
 
 .name_box {
     width: 100%;
-    height: 15%;
+    height: 13%;
     padding-top: 15px;
     font-size: 45px;
     display: flex;
@@ -27,7 +27,7 @@
 .result_list {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
@@ -59,11 +59,6 @@
     margin: 5px;
     color: white;
     font-size: 15px;
-}
-
-.result_box{
-    display: flex;
-    align-items: center;
 }
 
 .prev_btn, .next_btn {
