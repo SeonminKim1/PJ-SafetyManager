@@ -23,7 +23,7 @@
                 url: "/user/api/login",
                 data: {'id_give': id, 'pwd_give': pwd},
                 success: function (response) {
-                    alert(rseponse['msg'])
+                    alert(response['msg'])
                     if (response['result'] == 'success') {
                         // 토큰 최상위 경로에 쿠키 저장
                         document.cookie = 'mytoken='+response['token']+';path=/'

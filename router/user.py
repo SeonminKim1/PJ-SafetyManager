@@ -76,7 +76,7 @@ def api_login():
         # 토큰 생성 payload의 값 인코딩, 암호키 필수 유출금지!, 암호화형태 지정
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
-        return jsonify({'result': 'success', 'token': token, 'msg': "로그인 성공\n" + user['name'] + ' 님 환영합니다 '})
+        return jsonify({'result': 'success', 'token': token, 'msg': "로그인 성공\n" + user['name'] + ' 님 환영합니다.'})
     else:
         return jsonify({'result': 'fail', 'msg': '아이디 또는 비밀번호가 일치하지 않습니다.'})
 
