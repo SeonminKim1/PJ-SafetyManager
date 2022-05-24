@@ -83,10 +83,10 @@
                         <div class='score_label_modal' style="color:red;">Safety
                             :&nbsp;{{ my_result.isPass }}</span></div>
                     {% endif %}
-
-                </div>
-                <div class="modal_result_close" onclick="result_modal_func_off('{{ my_result.num }}')">
-                    Close
+                    </div>
+                    <div class="modal_result_close" onclick="result_modal_func_off('{{ my_result.num }}')">
+                        Close
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,20 +100,33 @@
                 <div class="name_box">
                     <label id='profile_name'>{{ user_info.company }}</label>
                 </div>
-                <hr>
-                <div class="result_list">
-                    {% for my_result in results %}
-                        <div class="post" onclick="result_modal_func('{{ my_result.num }}')">
-                            {% if my_result.file_type == 'image' %}
-                                <img src="{{ my_result.predict_path }}" alt="게시물없음">
-                            {% elif my_result.file_type == 'video' %}
-                                <video src="{{ my_result.predict_path }}" alt="게시물없음" type="video/mp4" controls></video>
-                            {% endif %}
-                            <p>생성일: {{ my_result.date }}</p>
-                            <p>작성자: {{ my_result.name }}</p>
-                            <p>파일종류: {{ my_result.file_type }}</p>
-                        </div>
-                    {% endfor %}
+                <div class="result_box">
+                    <div class="prev_btn">
+                        {% if p.start_page > p.page_block %}
+                            <a href="/profile/?page={{ p.start_page - p.page_block }}" style="font-size: 42pt"> 〈 </a>
+                        {% endif %}
+                    </div>
+                    <div class="result_list">
+                        {% for my_result in results %}
+                            <div class="post" onclick="result_modal_func('{{ my_result.num }}')">
+                                {% if my_result.file_type == 'image' %}
+                                    <img src="{{ my_result.predict_path }}" alt="게시물없음">
+                                {% elif my_result.file_type == 'video' %}
+                                    <video src="{{ my_result.predict_path }}" alt="게시물없음" type="video/mp4"
+                                           controls></video>
+                                {% endif %}
+                                <p>생성일: {{ my_result.date }}</p>
+                                <p>작성자: {{ my_result.name }}</p>
+                                <p>파일종류: {{ my_result.file_type }}</p>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                    <div class="next_btn">
+                        {% if p.end_page < p.page_count %}
+                            <a href="/profile/?page={{ p.start_page + p.page_block }}" style="font-size: 42pt"> 〉 </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

@@ -52,7 +52,7 @@
                 {% set indexs = 0 %}
                 {% for rank in ranking %}
                     <tr>
-                        {% set indexs = (current_page - 1) * 10 + loop.index %}
+                        {% set indexs = (p.current_page - 1) * 10 + loop.index %}
                         <th class="th_{{ indexs }}">{{ indexs }}</th>
                         <th class="th_{{ indexs }}">{{ rank.company }}</th>
                         <th class="th_{{ indexs }}">{{ rank.score }}</th>
@@ -61,14 +61,14 @@
             </table>
         </div>
         <div class="page_btn">
-            {% if start_page > page_block %}
-                <a href="/ranking/?page={{ start_page - page_block }}">이전</a>
+            {% if p.start_page > p.page_block %}
+                <a href="/ranking/?page={{ p.start_page - p.page_block }}">이전</a>
             {% endif %}
-            {#            {% for i in range(start_page, end_page) %}#}
-            {#                <a href="/ranking/?page={{ i }}"> {{ i }} </a>#}
-            {#            {% endfor %}#}
-            {% if end_page < page_count %}
-                <a href="/ranking/?page={{ start_page + page_block }}">다음</a>
+            {% for i in range(p.start_page, p.end_page) %}
+                <a href="/ranking/?page={{ i }}"> {{ i }} </a>
+            {% endfor %}
+            {% if p.end_page < p.page_count %}
+                <a href="/ranking/?page={{ p.start_page + p.page_block }}">다음</a>
             {% endif %}
         </div>
     </div> <!-- container -->

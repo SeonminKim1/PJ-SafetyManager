@@ -28,14 +28,37 @@ def profile():
 
         user_info = db.USER.find_one({"id": payload['id']})  # id, num, nickname, feed_images, content, like, reply
         print(user_info)
-        results = sorted(list(db.RESULT.find({'company': user_info['company']})), key=lambda x: x['date'], reverse=True)
+
+        page = request.args.get('page', type=int, default=1)  # 페이지
+        per_page = 10
+        results = sorted(list(db.RESULT.find({'company': user_info['company']}).skip((page-1)*per_page).limit(per_page)), key=lambda x: x['date'], reverse=True)
         print(results)
 
         for i, res in enumerate(results):
             results[i]['upload_path'] = '../' + str(res['upload_path'])
             results[i]['predict_path'] = '../' + str(res['predict_path'])
 
-        return render_template('profile.html', user_info=user_info, results=results)
+        page_block = 1
+        start_page = int((page - 1) / page_block * page_block + 1)
+        end_page = start_page + page_block - 1
+        count = len(list(db.RESULT.find({'company': user_info['company']})))
+
+        remained = 0
+        if count % per_page > 0:
+            remained = 1
+        page_count = int(count / per_page) + remained
+
+        if end_page > page_count:
+            end_page = page_count
+
+        pagination = {
+            'start_page': start_page,
+            'end_page': end_page,
+            'page_block': page_block,
+            'page_count': page_count
+        }
+
+        return render_template('profile.html', user_info=user_info, results=results, p=pagination)
 
     except jwt.ExpiredSignatureError:  # 해당 token의 로그인 시간이 만료시 login 페이지로 redirect
         return redirect(url_for("user.login"))

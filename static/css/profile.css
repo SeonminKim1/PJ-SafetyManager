@@ -1,5 +1,5 @@
 .container > div {
-    width: 65%;
+    width: 80%;
     height: 100%;
     margin: auto;
     padding: 30px;
@@ -59,4 +59,13 @@
     margin: 5px;
     color: white;
     font-size: 15px;
+}
+
+.result_box{
+    display: flex;
+    align-items: center;
+}
+
+.prev_btn, .next_btn {
+    margin: 0 20px 0 20px;
 }
