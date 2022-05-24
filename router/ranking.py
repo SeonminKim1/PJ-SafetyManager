@@ -55,7 +55,7 @@ def ranking():
             today_month = str(datetime.date.today().month)
 
             # 기업의 평균 score 저장
-            avg_score = {'company': company_name, 'score': 0}
+            avg_score = {'company': company_name, 'score': 0, 'is_safe': 0}
             score_total = 0.0
 
             for company in company_info:
@@ -63,6 +63,8 @@ def ranking():
                     if company['date'][5:7] == today_month.zfill(2):  # 저장되어있는 월과 오늘 월이 같을 경우만
                         score_total = company['score'] + score_total
                         avg_score['score'] = round(score_total / len(company_info), 3)
+                        if avg_score['score'] > 95:
+                            avg_score['is_safe'] = 1
 
             company_high_score.append(avg_score)
             # 데이터 score를 기준으로 내림 차순
