@@ -1,4 +1,8 @@
-.container > div {
+.profile_warp {
+    max-width: 1200px;
+    max-height: 1000px;
+    min-width: 1000px;
+    min-height: 800px;
     width: 65%;
     height: 100%;
     margin: auto;
@@ -16,29 +20,31 @@
 
 .name_box {
     width: 100%;
-    height: 15%;
-    padding-top: 15px;
-    font-size: 45px;
+    height: 12%;
+    padding-top: 10px;
+    font-size: 40px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
 .result_list {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+
 }
 
 .result_list .post {
     width: 100%;
-    height: 270px;
-    border: none;
+    height: 250px;
+    border-bottom: 1px solid white;
     overflow: hidden;
     margin-bottom: 0;
     position: relative;
     padding: 0;
+    cursor: pointer;
 }
 
 .result_list img {
@@ -59,11 +65,6 @@
     margin: 5px;
     color: white;
     font-size: 15px;
-}
-
-.result_box{
-    display: flex;
-    align-items: center;
 }
 
 .prev_btn, .next_btn {
