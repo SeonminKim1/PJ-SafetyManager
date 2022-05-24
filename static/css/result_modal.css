@@ -37,7 +37,7 @@
 
 /* score */
 .score_box_modal {
-    margin-top: 20px;
+    margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,5 +50,6 @@
 }
 
 .score_label_modal {
-    margin: 5px 10px;
+    margin: 0 20px;
+    padding: 10px 20px 10px 20px;
 }
