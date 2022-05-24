@@ -62,13 +62,13 @@
         </div>
         <div class="page_btn">
             {% if p.start_page > p.page_block %}
-                <a href="/ranking/?page={{ p.start_page - p.page_block }}">이전</a>
+                <a class="previous_btn" href="/ranking/?page={{ p.start_page - p.page_block }}">이전</a>
             {% endif %}
             {% for i in range(p.start_page, p.end_page) %}
                 <a href="/ranking/?page={{ i }}"> {{ i }} </a>
             {% endfor %}
             {% if p.end_page < p.page_count %}
-                <a href="/ranking/?page={{ p.start_page + p.page_block }}">다음</a>
+                <a class="next_btn" href="/ranking/?page={{ p.start_page + p.page_block }}">다음</a>
             {% endif %}
         </div>
     </div> <!-- container -->
