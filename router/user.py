@@ -8,7 +8,6 @@ import datetime
 app = Flask(__name__)
 
 SECRET_KEY = '$lucky7'
-WEIGHTS_PATH = 'detector/weights/best.pt'
 
 # DB 연결 코드
 from pymongo import MongoClient
@@ -66,7 +65,6 @@ def api_login():
 
     # DB에 저장된 값 가져오기
     user = db.USER.find_one({'id': id_receive, 'pwd': hashed_pw})
-    print(user)
 
     if user is not None:
         # JWT(Json Wep Token)생성
@@ -75,12 +73,10 @@ def api_login():
             'id': id_receive,
             'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=1800)
         }
-        print(payload)
         # 토큰 생성 payload의 값 인코딩, 암호키 필수 유출금지!, 암호화형태 지정
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
-        print(token)
 
-        return jsonify({'result': 'success', 'token': token, 'msg': '로그인 성공'})
+        return jsonify({'result': 'success', 'token': token, 'msg': "로그인 성공\n" + user['name'] + ' 님 환영합니다.'})
     else:
         return jsonify({'result': 'fail', 'msg': '아이디 또는 비밀번호가 일치하지 않습니다.'})
 
