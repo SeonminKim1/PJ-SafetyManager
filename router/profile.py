@@ -31,7 +31,7 @@ def profile():
 
         # page 파라미터 가져오기 없을경우 기본값 1 지정
         page = request.args.get('page', type=int, default=1)
-        per_page = 10  # 한 페이지에 출력할 게시물 수
+        per_page = 8  # 한 페이지에 출력할 게시물 수
         results = sorted(
             list(db.RESULT.find({'company': user_info['company']}).skip((page - 1) * per_page).limit(per_page)),
             key=lambda x: x['date'], reverse=True)

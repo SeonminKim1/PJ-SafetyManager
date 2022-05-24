@@ -58,7 +58,7 @@
             <!-- modal content -->
             <div class="modal_box">
                 <div class="result_box_modal">
-                    등록일 : {{ my_result.date }}
+                    등록일 : {{ my_result.date[:4] }}년 {{ my_result.date[5:7] }}월 {{ my_result.date[8:10] }}일 {{ my_result.date[11:13] }}:{{ my_result.date[14:16] }}:{{ my_result.date[17:] }}
                 </div>
                 <hr>
                 <div class="main_box_modal">
@@ -74,7 +74,7 @@
                 </div>
                 <hr>
                 <div class="score_box_modal">
-                    <div class='score_label_modal'>헬멧 :&nbsp;{{ my_result.helmet }}</div>
+                    <div class='score_label_modal'>| 헬멧 :&nbsp;{{ my_result.helmet }}</div>
                     <div class='score_label_modal'>| No헬멧 :&nbsp;{{ my_result.head }}</div>
                     <div class='score_label_modal'>| 점수 :&nbsp;{{ my_result.score }}</div>
                     {% if my_result.isPass == True %}
@@ -119,7 +119,7 @@
                                 <video src="{{ my_result.predict_path }}" alt="게시물없음" type="video/mp4"
                                        controls></video>
                             {% endif %}
-                            <p>등록일: {{ my_result.date[:10] }}</p>
+                            <p>등록일: {{ my_result.date[:4] }}년 {{ my_result.date[5:7] }}월 {{ my_result.date[8:10] }}일</p>
                             <p>작성자: {{ my_result.name }}</p>
                             <p>파일종류: {{ my_result.file_type }}</p>
                         </div>
