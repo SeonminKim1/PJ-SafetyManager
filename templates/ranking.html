@@ -62,9 +62,6 @@
             {% if start_page > page_block %}
                 <a href="/ranking/?page={{ start_page - page_block }}">이전</a>
             {% endif %}
-{#            {% for i in range(start_page, end_page) %}#}
-{#                <a href="/ranking/?page={{ i }}"> {{ i }} </a>#}
-{#            {% endfor %}#}
             {% if end_page < page_count %}
                 <a href="/ranking/?page={{ start_page + page_block }}">다음</a>
             {% endif %}
