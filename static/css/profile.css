@@ -1,4 +1,8 @@
 .profile_warp {
+    max-width: 1200px;
+    max-height: 1000px;
+    min-width: 1000px;
+    min-height: 800px;
     width: 65%;
     height: 100%;
     margin: auto;
