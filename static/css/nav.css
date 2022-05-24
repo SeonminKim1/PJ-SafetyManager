@@ -41,12 +41,8 @@ nav {
     height: 60px;
 }
 
-.nav_logo p {
-    cursor: pointer;
-}
-
 .nav_menu {
-    width: 35%;
+    width: 50%;
     min-width: 300px;
     display: flex;
     align-items: center;
@@ -54,7 +50,7 @@ nav {
     font-size: 18px;
 }
 
-.nav_menu p {
+.event_menu{
     cursor: pointer;
 }
 

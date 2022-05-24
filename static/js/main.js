@@ -86,9 +86,9 @@ function preview() {
     $('#result_label').css({'color': 'white'})
     $('#helmet_value').text('0')
     $('#head_value').text('0')
-    $('#score_value').text('0.0')
-    $('#isPass_value').text('UnKnown')
-    $('#isPass_value').css({'color': 'white'})
+    $('#score_value').text('0')
+    $('#isPass_value').text('')
+    $('#isPass_value').css({'color':'white'})
 }
 
 var upload_path = ''

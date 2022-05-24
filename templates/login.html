@@ -12,32 +12,9 @@
     <!-- ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-
-    <script>
-        function login() {
-            let id = $('#id').val()
-            let pwd = $('#pwd').val()
-
-            $.ajax({
-                type: "POST",
-                url: "/user/api/login",
-                data: {'id_give': id, 'pwd_give': pwd},
-                success: function (response) {
-                    alert(response['msg'])
-                    if (response['result'] == 'success') {
-                        // 토큰이 정상적으로 발급되면, 'token' 토큰을 받아 쿠키에 저장
-                        // 토큰 최상위 경로에 쿠키 저장
-                        document.cookie = 'mytoken='+response['token']+';path=/'
-                        window.location.replace('/')
-                    } else {
-                        // 로그인 실패 시
-                        window.location.replace('/user/login')
-                    }
-                }
-            })
-        }
-    </script>
 </head>
+
+<script src="{{ url_for('static', filename='js/user.js') }}"></script>
 
 <body>
 <main>
