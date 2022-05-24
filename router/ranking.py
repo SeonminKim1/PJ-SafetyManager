@@ -71,7 +71,7 @@ def ranking():
     per_page = 10
     start_row = (current_page - 1) * per_page + 1
     end_row = start_row + per_page - 1
-    rankings = sort_data[start_row:end_row]
+    rankings = sort_data[start_row -1:end_row]
 
     page_block = 1
     start_page = int((current_page - 1) / page_block * page_block + 1)
@@ -86,12 +86,16 @@ def ranking():
     if end_page > page_count:
         end_page = page_count
 
+    pagination = {
+        'current_page': current_page,
+        'start_page': start_page,
+        'end_page': end_page,
+        'page_count': page_count,
+        'page_block': page_block,
+    }
+
     return render_template('/ranking.html',
                            ranking=rankings,
-                           current_page=current_page,
-                           start_page=start_page,
-                           end_page=end_page,
-                           page_count=page_count,
-                           page_block=page_block,
+                           p=pagination,
                            today_month=today_month,
                            user_info=user_info)
