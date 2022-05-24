@@ -7,7 +7,9 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/bee3d4f913.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;700&family=Noto+Sans+KR:wght@100;500;900&display=swap"
           rel="stylesheet">
 
     <!-- CSS -->
@@ -75,11 +77,12 @@
                     <div class='score_label_modal' style="color:blue;">Score :&nbsp;{{ my_result.score }}</div>
 
                     {% if my_result.isPass == True %}
-                        <div class='score_label_modal' style="color:green;">Safety :&nbsp;{{ my_result.isPass }}/div>
+                        <div class='score_label_modal' style="color:green;">Safety
+                            :&nbsp;{{ my_result.isPass }}</span></div>
                     {% elif my_result.isPass == False %}
-                        <div class='score_label_modal' style="color:red;">Safety :&nbsp;{{ my_result.isPass }}</div>
+                        <div class='score_label_modal' style="color:red;">Safety
+                            :&nbsp;{{ my_result.isPass }}</span></div>
                     {% endif %}
-
                     </div>
                     <div class="modal_result_close" onclick="result_modal_func_off('{{ my_result.num }}')">
                         Close
@@ -97,7 +100,6 @@
                 <div class="name_box">
                     <label id='profile_name'>{{ user_info.company }}</label>
                 </div>
-                <hr>
                 <div class="result_box">
                     <div class="prev_btn">
                         {% if p.start_page > p.page_block %}

@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-family: "Noto Sans KR", sans-serif
 }
 
 body, html {
@@ -28,8 +28,9 @@ section {
 
 .result_box{
     padding:60px 0px 10px 0px;
-    color:green;
+    color:whitesmoke;
     font-size:80px;
+    font-weight: 900;
     text-align:center;
 }
 
@@ -81,30 +82,30 @@ section {
 .btn{
     width: 120px;
     height: 40px;
-    margin:0px 5px 0px 5px; 
+    margin:0px 15px 0px 15px;
     border: none;
-    border-radius: 15px;
+    border-radius: 30px;
     font-weight: 600;
     cursor: pointer;
     text-align: center;
-    color: #e1eef6;
+    color: whitesmoke;
 }
-.btn_blue {
+.btn_select {
     display: flex;
     padding-top:7px;
     justify-content: center;
     align-content: center;
-    background-color: rgb(83, 112, 209);    
+    background-color: lightslategrey;
 }
 
-.btn_red {
-    background-color: #ff5f2e;    
+.btn_upload {
+    background-color: #52608D
 }
 
-.btn_green {
-    background-color: rgb(134, 204, 29);    
+.btn_detect {
+    background-color: darkblue;
 }
 
-.btn_green:hover {
+.btn_detect:hover {
     width: 120px;
 }
