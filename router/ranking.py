@@ -23,7 +23,6 @@ from detector.detect import detect_run
 
 bp = Blueprint("ranking", __name__, url_prefix="/ranking")
 
-
 @bp.route('/', methods=['GET'])
 def ranking():
     token_receive = request.cookies.get('mytoken')
