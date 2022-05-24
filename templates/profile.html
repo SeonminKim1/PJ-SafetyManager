@@ -7,7 +7,9 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/bee3d4f913.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;700&family=Noto+Sans+KR:wght@100;500;900&display=swap"
           rel="stylesheet">
 
     <!-- CSS -->
@@ -63,19 +65,23 @@
                         <img id="upload_img" src="{{ my_result.upload_path }}" alt="업로드 사진">
                         <img id="predict_img" src="{{ my_result.predict_path }}" alt="추론 사진">
                     {% elif my_result.file_type == 'video' %}
-                        <video id="upload_vid" src="{{ my_result.upload_path }}" alt="업로드 비디오" type="video/mp4" controls muted></video>
-                        <video id="predict_vid" src="{{ my_result.predict_path }}" alt="추론 비디오" type="video/mp4" controls muted></video>
+                        <video id="upload_vid" src="{{ my_result.upload_path }}" alt="업로드 비디오" type="video/mp4" controls
+                               muted></video>
+                        <video id="predict_vid" src="{{ my_result.predict_path }}" alt="추론 비디오" type="video/mp4"
+                               controls muted></video>
                     {% endif %}
                 </div>
                 <div class="score_box_modal">
                     <div class='score_label_modal' style="color:blue;">Helmet :&nbsp;{{ my_result.helmet }}</div>
                     <div class='score_label_modal' style="color:blue;">No Helmet :&nbsp;{{ my_result.head }}</div>
                     <div class='score_label_modal' style="color:blue;">Score :&nbsp;{{ my_result.score }}</div>
-                    
+
                     {% if my_result.isPass == True %}
-                    <div class='score_label_modal' style="color:green;">Safety :&nbsp;{{ my_result.isPass }}</span></div>
+                        <div class='score_label_modal' style="color:green;">Safety
+                            :&nbsp;{{ my_result.isPass }}</span></div>
                     {% elif my_result.isPass == False %}
-                    <div class='score_label_modal' style="color:red;">Safety :&nbsp;{{ my_result.isPass }}</span></div>
+                        <div class='score_label_modal' style="color:red;">Safety
+                            :&nbsp;{{ my_result.isPass }}</span></div>
                     {% endif %}
 
                 </div>
@@ -105,7 +111,7 @@
                             {% endif %}
                             <p>생성일: {{ my_result.date }}</p>
                             <p>작성자: {{ my_result.name }}</p>
-                            <p>파일종류: {{my_result.file_type}}</p>
+                            <p>파일종류: {{ my_result.file_type }}</p>
                         </div>
                     {% endfor %}
                 </div>

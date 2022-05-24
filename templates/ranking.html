@@ -7,7 +7,9 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/bee3d4f913.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;700&family=Noto+Sans+KR:wght@100;500;900&display=swap"
           rel="stylesheet">
 
     <!-- CSS -->
@@ -62,9 +64,9 @@
             {% if start_page > page_block %}
                 <a href="/ranking/?page={{ start_page - page_block }}">이전</a>
             {% endif %}
-{#            {% for i in range(start_page, end_page) %}#}
-{#                <a href="/ranking/?page={{ i }}"> {{ i }} </a>#}
-{#            {% endfor %}#}
+            {#            {% for i in range(start_page, end_page) %}#}
+            {#                <a href="/ranking/?page={{ i }}"> {{ i }} </a>#}
+            {#            {% endfor %}#}
             {% if end_page < page_count %}
                 <a href="/ranking/?page={{ start_page + page_block }}">다음</a>
             {% endif %}

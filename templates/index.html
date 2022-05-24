@@ -7,8 +7,7 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/bee3d4f913.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" href="/static/css/nav.css">
@@ -27,7 +26,7 @@
 
 </head>
 
-<script src="{{url_for('static', filename='js/main.js')}}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 <body>
 {% include 'nav.html' %}
@@ -69,14 +68,14 @@
 
         <div class="btn_box">
             <div>
-                <label for="file" class="btn btn_blue">파일 선택</label>
+                <label for="file" class="btn btn_select">파일 선택</label>
                 <input id="file" type="file" style="display: none" onChange="preview()">
             </div>
             <div>
-                <button class="btn btn_red" type="button" onclick="posting({{user_info}})">업로드 하기</button>
+                <button class="btn btn_upload" type="button" onclick="posting({{ user_info }})">업로드 하기</button>
             </div>
             <div>
-                <button class="btn btn_green" type="button" onclick="detecting()">안전 확인</button>
+                <button class="btn btn_detect" type="button" onclick="detecting()">안전 확인</button>
             </div>
         </div>
     </div> <!-- container -->
