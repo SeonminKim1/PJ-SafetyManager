@@ -24,9 +24,10 @@
             <p>Safety Manager</p>
         </div>
         <div class="nav_menu">
-            <a href="/profile/"><p>{{ user_info.name }} 님</p></a>
-            <a href="/ranking/"><p>Safety Ranking</p></a>
-            <p onclick="logout()">Logout</p>
+            <p>{{ user_info.name }} 님 환영합니다.</p>
+            <a href="/profile/"><p class="event_menu">{{user_info.company}}</p></a>
+            <a href="/ranking/"><p class="event_menu">Safety Ranking</p></a>
+            <p class="event_menu" onclick="logout()">Logout</p>
         </div>
     </div>
 </nav>
