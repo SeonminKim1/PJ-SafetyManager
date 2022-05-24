@@ -77,7 +77,7 @@ function preview() {
         video.load();
     }
     $('#result_label').text('Safety Manager')   
-    $('#result_label').css({'color':'green'}) 
+    $('#result_label').css({'color':'white'}) 
     $('#helmet_value').text('0')
     $('#head_value').text('0')
     $('#score_value').text('0')
