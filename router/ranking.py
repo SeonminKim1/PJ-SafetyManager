@@ -69,7 +69,9 @@ def ranking():
 
     current_page = request.args.get("page", type=int, default=1)
     per_page = 10
-    rankings = sort_data[current_page - 1: (current_page - 1) + per_page]
+    start_row = (current_page - 1) * per_page + 1
+    end_row = start_row + per_page - 1
+    rankings = sort_data[start_row:end_row]
 
     page_block = 1
     start_page = int((current_page - 1) / page_block * page_block + 1)
@@ -79,7 +81,7 @@ def ranking():
     remained = 0
     if count % per_page > 0:
         remained = 1
-    page_count = count / per_page + remained
+    page_count = int(count / per_page) + remained
 
     if end_page > page_count:
         end_page = page_count

@@ -29,10 +29,8 @@ section {
 .result_box{
     padding:60px 0px 10px 0px;
     color:green;
-    font-style: italic;
     font-size:80px;
     text-align:center;
-    
 }
 
 .img_box{
@@ -64,7 +62,7 @@ section {
     font-size: 24px;
 }
 .score_label{
-    margin: 5px 1px 5px 10px;
+    margin: 5px 10px 5px 10px;
 }
 .score_value{
     margin: 5px 10px 5px 1px;

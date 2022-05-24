@@ -23,14 +23,15 @@
                 url: "/user/api/login",
                 data: {'id_give': id, 'pwd_give': pwd},
                 success: function (response) {
+                    alert(response['msg'])
                     if (response['result'] == 'success') {
                         alert('토큰 생성 완료!')
                         // 토큰이 정상적으로 발급되면, 'token' 토큰을 받아 쿠키에 저장
+                        // 토큰 최상위 경로에 쿠키 저장
                         document.cookie = 'mytoken='+response['token']+';path=/'
                         window.location.replace('/')
                     } else {
                         // 로그인 실패 시
-                        alert(response['msg']);
                         window.location.replace('/user/login')
                     }
                 }
