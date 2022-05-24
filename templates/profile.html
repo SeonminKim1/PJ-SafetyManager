@@ -7,7 +7,9 @@
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/bee3d4f913.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;700&family=Noto+Sans+KR:wght@100;500;900&display=swap"
           rel="stylesheet">
 
     <!-- CSS -->
@@ -56,8 +58,9 @@
             <!-- modal content -->
             <div class="modal_box">
                 <div class="result_box_modal">
-                    <label id='result_label'>Safety Manager</label>
+                    등록일 : {{ my_result.date }}
                 </div>
+                <hr>
                 <div class="main_box_modal">
                     {% if my_result.file_type == 'image' %}
                         <img id="upload_img" src="{{ my_result.upload_path }}" alt="업로드 사진">
@@ -69,11 +72,11 @@
                                autoplay muted></video>
                     {% endif %}
                 </div>
+                <hr>
                 <div class="score_box_modal">
                     <div class='score_label_modal'>| 헬멧 :&nbsp;{{ my_result.helmet }}</div>
                     <div class='score_label_modal'>| No헬멧 :&nbsp;{{ my_result.head }}</div>
                     <div class='score_label_modal'>| 점수 :&nbsp;{{ my_result.score }}</div>
-
                     {% if my_result.isPass == True %}
                         <div class='score_label_modal' style="color:green;"><span>| 안전여부 : </span>Safe</div>
                     {% elif my_result.isPass == False %}
@@ -92,7 +95,6 @@
                 <div class="name_box">
                     <label id='profile_name'>{{ user_info.company }}</label>
                 </div>
-                <hr>
                 <div class="result_box">
                     <div class="prev_btn">
                         {% if p.start_page > p.page_block %}

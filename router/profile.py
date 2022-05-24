@@ -30,15 +30,14 @@ def profile():
         print(user_info)
 
         page = request.args.get('page', type=int, default=1)  # 페이지
-
-        results = sorted(list(db.RESULT.find({'company': user_info['company']}).skip((page-1)*10).limit(10)), key=lambda x: x['date'], reverse=True)
+        per_page = 10
+        results = sorted(list(db.RESULT.find({'company': user_info['company']}).skip((page-1)*per_page).limit(per_page)), key=lambda x: x['date'], reverse=True)
         print(results)
 
         for i, res in enumerate(results):
             results[i]['upload_path'] = '../' + str(res['upload_path'])
             results[i]['predict_path'] = '../' + str(res['predict_path'])
 
-        per_page = 10
         page_block = 1
         start_page = int((page - 1) / page_block * page_block + 1)
         end_page = start_page + page_block - 1
