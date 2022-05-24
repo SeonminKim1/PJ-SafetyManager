@@ -27,6 +27,6 @@ table {
     width: 500px;
 }
 
-.th_1, .th_2, .th_3 {
+.is_safe_1 {
     background-color: green;
 }

@@ -51,11 +51,11 @@
                 </tr>
                 {% set indexs = 0 %}
                 {% for rank in ranking %}
-                    <tr>
+                    <tr class="is_safe_{{ rank.is_safe }}">
                         {% set indexs = (p.current_page - 1) * 10 + loop.index %}
-                        <th class="th_{{ indexs }}">{{ indexs }}</th>
-                        <th class="th_{{ indexs }}">{{ rank.company }}</th>
-                        <th class="th_{{ indexs }}">{{ rank.score }}</th>
+                        <th>{{ indexs }}</th>
+                        <th>{{ rank.company }}</th>
+                        <th>{{ rank.score }}</th>
                     </tr>
                 {% endfor %}
             </table>
