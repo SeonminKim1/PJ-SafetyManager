@@ -23,13 +23,17 @@ nav {
 }
 
 .nav_logo {
-    width: 25%;
+    width: 40%;
     min-width: 250px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
+}
+
+.nav_logo span {
+    font-size: 18px;
 }
 
 .nav_logo img {
@@ -43,7 +47,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 15px;
+    font-size: 18px;
 }
 
 .event_menu{

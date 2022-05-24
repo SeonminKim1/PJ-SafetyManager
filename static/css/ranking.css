@@ -50,3 +50,7 @@ table {
 th {
     padding: 5px;
 }
+
+.page_btn > a {
+    margin: 0 10px;
+}

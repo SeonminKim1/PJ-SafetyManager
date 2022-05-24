@@ -27,7 +27,7 @@ section {
 }
 
 .result_box{
-    padding:60px 0px 10px 0px;
+    padding:40px 0px 10px 0px;
     color:whitesmoke;
     font-size:80px;
     font-weight: 900;
@@ -44,7 +44,7 @@ section {
     background-repeat: no-repeat;
     background-position: center;
     background-size:450px;
-    padding-bottom:40px;
+    padding-bottom:30px;
 }
 
 /* main box */
@@ -59,40 +59,41 @@ section {
     display:flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     color:white;
     font-size: 24px;
 }
 .score_label{
-    margin: 5px 10px 5px 10px;
+    margin: 5px 20px;
 }
 .score_value{
-    margin: 5px 10px 5px 1px;
+    margin: 5px 10px;
 }
 
 /* btn */
 .btn_box {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 17px;
     display: flex;
-    grid-template-columns: 1fr 1fr;
     justify-content: center;
     align-content: center;
 }
 
 .btn{
-    width: 120px;
+    width: 140px;
     height: 40px;
-    margin:0px 15px 0px 15px;
+    margin:0px 20px 0px 20px;
     border: none;
     border-radius: 30px;
     font-weight: 600;
     cursor: pointer;
     text-align: center;
     color: whitesmoke;
+    font-size: 20px;
 }
 .btn_select {
+    padding-top:5px;
     display: flex;
-    padding-top:7px;
     justify-content: center;
     align-content: center;
     background-color: lightslategrey;
@@ -106,6 +107,6 @@ section {
     background-color: darkblue;
 }
 
-.btn_detect:hover {
-    width: 120px;
+.btn:hover {
+    width: 160px;
 }

@@ -6,11 +6,10 @@
     <div class="nav_head">
         <div class="nav_logo">
             <a href="/"><img src="/static/css/img/Safety-manager.png" alt="logo"></a>
-            <p>Safety Manager</p>
+            {{ user_info.company }}<span>의 </span>{{ user_info.name }}<span>님을 환영합니다!</span>
         </div>
         <div class="nav_menu">
-            <p>{{ user_info.name }} 님 환영합니다.</p>
-            <a href="/profile/"><p class="event_menu">{{user_info.company}}</p></a>
+            <a href="/profile/"><p class="event_menu">My Page</p></a>
             <a href="/ranking/"><p class="event_menu">Safety Ranking</p></a>
             <p class="event_menu" onclick="logout()">Logout</p>
         </div>
