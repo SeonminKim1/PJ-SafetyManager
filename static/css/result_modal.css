@@ -1,22 +1,8 @@
 .modal_box {
-    background-color: #C0C0C0;
+    background-color: #2C292A;
     height: 100%;
     width: 100%;
-}
-
-/*.modal_result_img {*/
-/*    object-fit: contain;*/
-/*    object-position: center;*/
-/*    height: 100%;*/
-/*    width: 100%;*/
-/*}*/
-
-.modal_result_close {
-    text-align: center;
-    margin-top: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    text-decoration: underline;
+    border-radius: 15px;
 }
 
 .result_box_modal {
@@ -24,12 +10,10 @@
     height: 13%;
     margin-bottom: 5px;
     padding: 10px;
-    color:green;
-    font-style: italic;
-    font-size: 45px;
+    color:white;
+    font-size: 40px;
     text-align: center;
 }
-
 
 /* main box */
 .main_box_modal, .main_vid_box_modal {
@@ -53,11 +37,16 @@
 
 /* score */
 .score_box_modal {
+    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 24px;
+}
+
+.score_box_modal span {
+    color: white;
 }
 
 .score_label_modal {
