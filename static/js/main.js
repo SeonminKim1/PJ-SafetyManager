@@ -38,7 +38,7 @@ function detect_css(results){
     $('#score_value').text(results['score'])
     var isPass = ''
     if (results['isPass'] == true){
-        isPass = 'Safety'
+        isPass = 'Safe'
         $('#isPass_value').text(isPass); $('#result_label').text(isPass)
         $('#isPass_value').css({'color':'green'}); $('#result_label').css({'color':'green'})
     }else{
