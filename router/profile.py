@@ -31,10 +31,16 @@ def profile():
 
         # page 파라미터 가져오기 없을경우 기본값 1 지정
         page = request.args.get('page', type=int, default=1)
-        per_page = 10  # 한 페이지에 출력할 게시물 수
+        per_page = 8  # 한 페이지에 출력 할 게시물 수
         results = sorted(
-            list(db.RESULT.find({'company': user_info['company']}).skip((page - 1) * per_page).limit(per_page)),
-            key=lambda x: x['date'], reverse=True)
+            list(db.RESULT.find({'company': user_info['company']})), key=lambda x: x['date'], reverse=True)
+
+        # 페이지에 맞는 첫 게시물 번호, 마지막 게시물 번호
+        start_row = (page - 1) * per_page + 1
+        end_row = start_row + per_page - 1
+
+        # 정리 끝난 list의 페이지에 맞게 출력하기 ex) page=1 일경우 0~9까지 page=2일경우 10~19 되도록
+        results = results[start_row - 1:end_row]
 
         for i, res in enumerate(results):
             results[i]['upload_path'] = '../' + str(res['upload_path'])

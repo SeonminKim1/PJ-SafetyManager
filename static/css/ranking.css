@@ -25,8 +25,13 @@ table {
     border-top: solid 1px white;
     border-bottom: solid 1px white;
     width: 500px;
+    border-collapse: collapse;
 }
 
 .is_safe_1 {
     background-color: green;
+}
+
+th {
+    padding: 5px;
 }
