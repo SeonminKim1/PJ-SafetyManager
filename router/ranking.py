@@ -35,12 +35,12 @@ def ranking():
         company_list = []
         # 모든 결과 불러오기
         result_list = list(db.RESULT.find({}, {'_id': False}))
-        print(result_list)
+        # print(result_list)
         # 결과 리스트에서 기업만 중복제거하여 분류
         for result in result_list:
             if result['company'] not in company_list:
                 company_list.append(result['company'])
-        print(company_list)
+        # print(company_list)
 
         # 각 기업의 결과 중 최고점수만 분류
         company_high_score = []
@@ -49,7 +49,7 @@ def ranking():
                                                                            'score': True,
                                                                            'date': True,
                                                                            '_id': False}))
-            print(company_info)
+            # print(company_info)
 
             # 오늘의 월만 추출하여 문자열화
             today_month = str(datetime.date.today().month)
@@ -69,7 +69,7 @@ def ranking():
             company_high_score.append(avg_score)
             # 데이터 score를 기준으로 내림 차순
             sort_data = sorted(company_high_score, key=itemgetter('score'), reverse=True)
-        print(sort_data)
+        # print(sort_data)
 
         # page 값 가져오기 없을 경우 기본값 1
         current_page = request.args.get("page", type=int, default=1)

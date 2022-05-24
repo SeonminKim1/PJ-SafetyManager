@@ -114,7 +114,7 @@
                             {% if my_result.file_type == 'image' %}
                                 <img src="{{ my_result.predict_path }}" alt="게시물없음">
                             {% elif my_result.file_type == 'video' %}
-                                <video src="{{ my_result.predict_path }}" alt="게시물없음" type="video/mp4" controls></video>
+                                <video src="{{ my_result.predict_path }}" alt="게시물없음" type="video/mp4" controls preload="metadata"></video>
                             {% endif %}
                             <p>등록일: {{ my_result.date[:4] }}년 {{ my_result.date[5:7] }}월 {{ my_result.date[8:10] }}일</p>
                             <p>작성자: {{ my_result.name }}</p>

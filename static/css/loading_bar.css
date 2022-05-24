@@ -37,8 +37,8 @@
 }
 
 .loading_box, #loading_div {
-    height: 350px;
-    width: 350px;
+    height: 355px;
+    width: 355px;
     position: relative;
     border-radius: 100%;
     margin:50px auto;
