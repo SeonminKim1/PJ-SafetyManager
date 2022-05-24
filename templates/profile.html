@@ -95,13 +95,17 @@
                 <div class="name_box">
                     <div class="prev_btn">
                         {% if p.start_page > p.page_block %}
-                            <a href="/profile/?page={{ p.start_page - p.page_block }}" style="font-size: 42pt"> 〈 </a>
+                            <a href="/profile/?page={{ p.start_page - p.page_block }}" style="font-size: 42pt"> ← </a>
+                            {% else %}
+                            <a href="/profile/?page=1" style="font-size: 42pt"> ← </a>
                         {% endif %}
                     </div>
                     <label id='profile_name'>{{ user_info.company }}</label>
                     <div class="next_btn">
                         {% if p.end_page < p.page_count %}
-                            <a href="/profile/?page={{ p.start_page + p.page_block }}" style="font-size: 42pt"> 〉 </a>
+                            <a href="/profile/?page={{ p.start_page + p.page_block }}" style="font-size: 42pt"> → </a>
+                            {% elif p.end_page == p.page_count %}
+                            <a href="/profile/?page={{ p.end_page }}" style="font-size: 42pt"> → </a>
                         {% endif %}
                     </div>
                 </div>
