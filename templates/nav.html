@@ -21,10 +21,10 @@
     <div class="nav_head">
         <div class="nav_logo">
             <a href="/"><img src="/static/css/img/Safety-manager.png" alt="logo"></a>
-            <p>Safety Manager</p>
+            {{ user_info.company }}<span>의 </span>{{ user_info.name }}<span>님을 환영합니다!</span>
         </div>
         <div class="nav_menu">
-            <a href="/profile/"><p>{{ user_info.name }} 님</p></a>
+            <a href="/profile/"><p>My Page</p></a>
             <a href="/ranking/"><p>Safety Ranking</p></a>
             <p onclick="logout()">Logout</p>
         </div>
