@@ -12,15 +12,23 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 10px;
     color: white;
     font-size: 20px;
     font-weight: bold;
 }
+
+.previous_btn, .next_btn {
+    margin-top: 10px;
+    margin-right: 40px;
+    margin-left: 40px;
+    color: grey;
+}
+
 .result_box {
     height: 110px;
     line-height: 80px;
 }
+
 #result_label {
     color: white;
     font-size: 42px;
