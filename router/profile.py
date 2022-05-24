@@ -29,28 +29,34 @@ def profile():
         user_info = db.USER.find_one({"id": payload['id']})  # id, num, nickname, feed_images, content, like, reply
         print(user_info)
 
-        page = request.args.get('page', type=int, default=1)  # 페이지
-        per_page = 10
-        results = sorted(list(db.RESULT.find({'company': user_info['company']}).skip((page-1)*per_page).limit(per_page)), key=lambda x: x['date'], reverse=True)
-        print(results)
+        # page 파라미터 가져오기 없을경우 기본값 1 지정
+        page = request.args.get('page', type=int, default=1)
+        per_page = 10  # 한 페이지에 출력할 게시물 수
+        results = sorted(
+            list(db.RESULT.find({'company': user_info['company']}).skip((page - 1) * per_page).limit(per_page)),
+            key=lambda x: x['date'], reverse=True)
 
         for i, res in enumerate(results):
             results[i]['upload_path'] = '../' + str(res['upload_path'])
             results[i]['predict_path'] = '../' + str(res['predict_path'])
 
+        # 페이징 숫자 ex) 이전 1 2 3 4 5 다음 >> 이 경우는 5
         page_block = 1
+
+        # 보여줄 페이징 번호들중 가장 첫번째, 마지막 번호 지정 ex) page=2 여도 1 2 3 4 5 가 출력되도록
         start_page = int((page - 1) / page_block * page_block + 1)
         end_page = start_page + page_block - 1
-        count = len(list(db.RESULT.find({'company': user_info['company']})))
 
+        count = len(list(db.RESULT.find({'company': user_info['company']})))
+        # 마지막 번호의 경우 게시물에 맞춰줘야한다 ex) 블록이 5여도 게시물이 모자라면 이전 1 2 3 다음 처럼 출력되도록
         remained = 0
         if count % per_page > 0:
             remained = 1
-        page_count = int(count / per_page) + remained
-
+        page_count = int(count / per_page) + remained  # 파이썬에서 자동형변환 안되어서 명시적 형변환 필수
         if end_page > page_count:
             end_page = page_count
 
+        # 출력 시 필요한 데이터들 모아서 리턴
         pagination = {
             'start_page': start_page,
             'end_page': end_page,
